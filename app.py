@@ -19,6 +19,8 @@ st.header("Are you a fresh grad who's landed your dream job in a brand new city?
 st.subheader("Introducing: GradMove!")
 st.markdown("Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.")
 
+# selectbox for cities
+
 df = pd.DataFrame({
     'cities': ["San Francisco", "Chicago", "New York", "Seattle", "Cambridge", "Amsterdam" ],
 })
