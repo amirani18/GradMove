@@ -17,9 +17,19 @@ housing_cities = housing[housing['Metro'].isin(cities)]
 # if there is more than one row 
 # with the same Metro name
 # for each row with the same Metro name
-# keep the one that has the highest value in the column 2019-12
-housing_cities = housing_cities.sort_values('2019-12', ascending=False).drop_duplicates('Metro')
+# for all the numerical columns, take the mean of the values, and keep only one row
 
+for city in cities:
+    # for each city in the list above
+    # keep only one row
+    # for all the numerical columns, take the mean of the values
+    if housing_cities[housing_cities['Metro'] == city].shape[0] > 1:
+        # take the mean of all the columns after column 6
+        # for each numerical column
+        for i in range(6, len(housing_cities.columns)):
+            # take the mean of the values and keep only one row
+            housing_cities.loc[housing_cities['Metro'] == city, housing_cities.columns[i]] = housing_cities[housing_cities['Metro'] == city].iloc[:, i].mean()
+            housing_cities = housing_cities.drop_duplicates(subset='Metro', keep='first')
 
 
 # make a time series plot for each city in the list above
