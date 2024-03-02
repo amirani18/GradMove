@@ -20,13 +20,12 @@ st.subheader("Introducing: GradMove!")
 st.markdown("Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.")
 
 df = pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 90, 30, 92]
+    'cities': ["San Francisco", "Chicago", "New York", "Seattle", "Cambridge", "Amsterdam" ],
 })
 
 option = st.selectbox(
     'Which city do you plan to move to?',
-    df['first column']
+    df['cities']
 )
 
 'You selected: ', option
