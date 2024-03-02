@@ -3,7 +3,7 @@ import pandas as pd
 
 import openai
 import langchain
-from langchain import openai as adapters  # If using LangChain
+# from langchain import openai as adapters  # If using LangChain
 
 # Initial page config
 title = "GradMove"
@@ -15,7 +15,6 @@ st.sidebar.title("vibes 💖")
 S = st.sidebar.slider('How Excited Are You to Be Here?', value = 1, 
                       min_value = 10, max_value = 100)
 st.sidebar.write("Excitement Level", S)
-
 # main body
 st.header("Are you a fresh grad who's landed your dream job in a brand new city?")
 st.subheader("Introducing: GradMove!")
