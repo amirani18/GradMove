@@ -60,7 +60,7 @@ def handle_chat_input(user_input, use_langchain=False):
 
 chat_input = st.text_input("Ask me anything:")
 if chat_input:
-    response = handle_chat_input(chat_input, use_langchain=True)  # Set use_langchain based on your preference
+    response = handle_chat_input(chat_input, use_langchain=False)  # Set use_langchain based on your preference
     st.write(response)
 
 
