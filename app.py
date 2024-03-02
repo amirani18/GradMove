@@ -1,32 +1,10 @@
 import streamlit as st
 import pandas as pd
 
-# Initial page config
+# # Initial page config
 title = "GradMove"
 st.title(title + " 🎓")
 st.write("by Areej, Shreya, Vibha, Mihika")
-
-# Page Configuration
-st.set_page_config(
-    page_title="GradMove 🎓",
-    page_icon="imgs/avatar_streamly.png",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        "Get Help": "https://github.com/amirani18/GradMove",
-        "Report a bug": "https://github.com/amirani18/GradMove",
-        "About": """
-            ## GradMove
-            
-            **GitHub**: https://github.com/amirani18/GradMove
-            
-            Recent college graduates often land their dream job with no idea of how to find housing at their new location. 
-            Introducing: GradMove! 
-            Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.  
-
-        """
-    }
-)
 
 # user inputs on sidebar
 st.sidebar.title("vibes 💖")
@@ -50,6 +28,44 @@ option = st.selectbox(
 )
 
 'You selected: ', option
+
+# # Create a sidebar navigation menu
+# page = st.sidebar.selectbox("Select a page", ["Housing Hub", "Chatbot"])
+
+# # Depending on the selected page, show different content
+# if page == "Housing Hub":
+#     st.header("GradMove 🎓")
+#     st.write("Welcome to Housing Hub!")
+# elif page == "Chatbot":
+#     st.header("GradMove 🎓")
+#     st.write("This is Chatbot.")
+# # elif page == "Page 3":
+# #     st.header("Page 3")
+# #     st.write("You are on Page 3.")
+
+# Define different page content
+def page1():
+    st.header("GradMove 🎓")
+    st.write("Welcome to Housing Hub!")
+
+def page2():
+    st.header("GradMove 🎓")
+    st.write("This is Chatbot.")
+
+# def page3():
+#     st.header("Page 3")
+#     st.write("You are on Page 3.")
+
+# Create a simple sidebar navigation menu to switch between pages
+page = st.sidebar.selectbox("Select a page", ["Housing Hub", "Chatbot"])
+
+# Display the content of the selected page
+if page == "Housing Hub":
+    page1()
+elif page == "Chatbot":
+    page2()
+# elif page == "Page 3":
+#     page3()
 
 
 
