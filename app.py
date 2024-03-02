@@ -7,7 +7,7 @@ import base64
 title = "GradMove"
 st.title(title + " 🎓")
 st.write("by Areej, Shreya, Vibha, Mihika")
-st.sidebar.title("Options")
+st.sidebar.title("vibes 💖")
 
 # user inputs on sidebar
 S = st.sidebar.slider('How Excited Are You to Be Here?', value = 1, 
