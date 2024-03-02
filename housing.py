@@ -1,8 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 # read csv file into pandas dataframe
-housing = pd.read_csv('/Users/shreya/Purdue/InnovateHer/GradMove/GradMove/archive/City_MedianRentalPrice_1Bedroom.csv')
+housing = pd.read_csv('City_MedianRentalPrice_1Bedroom_Cities_filtered.csv')
 
 # print the first 5 rows of the dataframe
 print(housing.head())
@@ -45,14 +46,16 @@ for city in cities:
     # plot the values
     x_values = housing_cities.columns[6:]
     y_values = housing_cities[housing_cities['Metro'] == city].iloc[0, 6:]
-    plt.plot(x_values, y_values, label=city)
+    plt.plot(x_values, y_values, label=city, color='pink', linewidth=2.5)
     plt.xlabel('Year-Month')
-    plt.ylabel('Price')
+    plt.ylabel('Rent per month')
     plt.title('Median Rental Price 1 Bedroom')
-    plt.xticks(rotation=90)
+    plt.tick_params(axis='x', which='major', labelsize=8)
+    plt.gca().xaxis.set_major_locator(ticker.MaxNLocator(nbins=10))
+    plt.xticks(rotation=45)
     plt.legend()
     plt.show()
     
     
 # save this into a new csv
-housing_cities.to_csv('/Users/shreya/Purdue/InnovateHer/GradMove/GradMove/City_MedianRentalPrice_1Bedroom_Cities_filtered.csv', index=False)
+housing_cities.to_csv('City_MedianRentalPrice_1Bedroom_Cities_filtered.csv', index=False)
