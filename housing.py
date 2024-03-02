@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
+
 # read csv file into pandas dataframe
 housing = pd.read_csv('City_MedianRentalPrice_1Bedroom_Cities_filtered.csv')
 
@@ -44,6 +45,7 @@ for city in cities:
     # y axis is the value of the column
     # title is the name of the city
     # plot the values
+   
     x_values = housing_cities.columns[6:]
     y_values = housing_cities[housing_cities['Metro'] == city].iloc[0, 6:]
     plt.plot(x_values, y_values, label=city, color='pink', linewidth=2.5)
