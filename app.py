@@ -53,18 +53,18 @@ option = st.selectbox(
 
 # chatbot page
 with st.sidebar:
-  markdown = "Housing Hub"
-  markdown = "Chat With Us!"
-  markdown = "Contact"
+  selectOne = "Housing Hub"
+  selectTwo = "Chat With Us!"
+  selectThree = "Contact"
   icons = ["house","book","envelope"],
   menu_icon = "cast",
   default_index = 0,
-  if markdown == "Housing Hub":
-    st.title(f"You Have selected {markdown}")
+  if selectOne == "Housing Hub":
+    st.title(f"You Have selected {selectOne}")
     st.header('GradMove')
-  if markdown == "Chat With Us":
-    st.title(f"You Have selected {markdown}")
-  if markdown == "Contact":
-    st.title(f"You Have selected {markdown}")
+  if selectTwo == "Chat With Us":
+    st.title(f"You Have selected {selectTwo}")
+  if selectThree == "Contact":
+    st.title(f"You Have selected {selectThree}")
 
 
