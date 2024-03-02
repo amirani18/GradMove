@@ -13,7 +13,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
-        "Meet The Team": "https://github.com/amirani18/GradMove",
+        "Get Help": "https://github.com/amirani18/GradMove",
         "Report a bug": "https://github.com/amirani18/GradMove",
         "About": """
             ## GradMove
