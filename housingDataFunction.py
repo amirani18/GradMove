@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 def plot_housing_prices_for_city(city):
     # read csv file into pandas dataframe
@@ -13,7 +14,7 @@ def plot_housing_prices_for_city(city):
 
     x_values = housing_cities.columns[6:]
     y_values = housing_cities[housing_cities['Metro'] == city].iloc[0, 6:]
-    plt.plot(x_values, y_values, label=city)
+    plt.plot(x_values, y_values, label=city, color = 'pink', linewidth = 2.5, marker = 'o')
     plt.xlabel('Year-Month')
     plt.ylabel('Price')
     plt.title('Median Rental Price 1 Bedroom')
@@ -25,4 +26,4 @@ def plot_housing_prices_for_city(city):
     housing_cities.to_csv('/Users/shreya/Purdue/InnovateHer/GradMove/GradMove/City_MedianRentalPrice_1Bedroom_Cities_filtered.csv', index=False)    
     
 # Example usage
-plot_housing_prices_for_city("Atlanta-Sandy Springs-Roswell")
+plot_housing_prices_for_city("New York-Newark-Jersey City")
