@@ -63,6 +63,9 @@ def handle_chat_input(user_input, use_langchain=False):
 
 def main():
     """Main function to orchestrate the Streamlit app."""
+    if st.session_state.get('history') is None:
+        st.session_state.history = []
+    
     page_config()
     user_inputs()  # Now includes displaying the response in the sidebar
     main_body()
