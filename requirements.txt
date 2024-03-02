@@ -75,3 +75,9 @@ urllib3==2.2.1
 validators==0.22.0
 yarl==1.9.4
 zipp==3.17.0
+streamlit
+streamlit-chat
+openai
+requests
+Image
+langchain
