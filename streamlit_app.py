@@ -15,7 +15,8 @@ S = st.sidebar.slider('How Excited Are You to Be Here?', value = 1,
 st.sidebar.write("Excitement Level", S)
 
 # main body
-st.header("Are you a fresh grad who's landed your dream job? Are you struggling to find your next home? Introducing: GradMove!")
+st.header("Are you a fresh grad who's landed your dream job?")
+st.subheader("Are you struggling to find your next home? Introducing: GradMove!")
 st.markdown("Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.")
 
 df = pd.DataFrame({
