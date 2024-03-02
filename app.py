@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from streamlit_option_menu import option_menu
 
 # Initial page config
 # title = "GradMove"
@@ -54,20 +53,18 @@ option = st.selectbox(
 
 # chatbot page
 with st.sidebar:
-  selected = option_menu(
-    menu_title = "Main Menu",
-    options = ["Housing Hub","Chat With Us!","Contact"],
-    icons = ["house","book","envelope"],
-    menu_icon = "cast",
-    default_index = 0,
-
-  )
-  if selected == "Housing Hub":
-    st.title(f"You Have selected {selected}")
+  markdown = "Housing Hub"
+  markdown = "Chat With Us!"
+  markdown = "Contact"
+  icons = ["house","book","envelope"],
+  menu_icon = "cast",
+  default_index = 0,
+  if markdown == "Housing Hub":
+    st.title(f"You Have selected {markdown}")
     st.header('GradMove')
-  if selected == "Chat With Us":
-    st.title(f"You Have selected {selected}")
-  if selected == "Contact":
-    st.title(f"You Have selected {selected}")
+  if markdown == "Chat With Us":
+    st.title(f"You Have selected {markdown}")
+  if markdown == "Contact":
+    st.title(f"You Have selected {markdown}")
 
 
