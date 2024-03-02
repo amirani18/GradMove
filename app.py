@@ -29,5 +29,19 @@ option = st.selectbox(
 
 'You selected: ', option
 
+# Create a sidebar navigation menu
+page = st.sidebar.selectbox("Select a page", ["Housing Hub", "Chatbot"])
+
+# Depending on the selected page, show different content
+if page == "Housing Hub":
+    st.header("GradMove 🎓")
+    st.write("Welcome to Housing Hub!")
+elif page == "Chatbot":
+    st.header("GradMove 🎓")
+    st.write("This is Chatbot.")
+# elif page == "Page 3":
+#     st.header("Page 3")
+#     st.write("You are on Page 3.")
+
 
 
