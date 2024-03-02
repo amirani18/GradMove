@@ -1,7 +1,7 @@
 import streamlit as st
-from pathlib import Path
 import pandas as pd
-import base64
+
+
 
 # Initial page config
 title = "GradMove"
@@ -11,7 +11,7 @@ st.sidebar.title("vibes 💖")
 
 # user inputs on sidebar
 S = st.sidebar.slider('How Excited Are You to Be Here?', value = 1, 
-                      min_value = 0, max_value = 10)
+                      min_value = 10, max_value = 100)
 st.sidebar.write("Excitement Level", S)
 
 # main body
