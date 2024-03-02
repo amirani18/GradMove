@@ -33,7 +33,7 @@ option = st.selectbox(
 
 'You selected: ', option
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = ""
 
 
 def handle_chat_input(user_input, use_langchain=False):
