@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 
 # Initial page config
-# title = "GradMove"
-# st.title(title + " 🎓")
-# st.write("by Areej, Shreya, Vibha, Mihika")
+title = "GradMove"
+st.title(title + " 🎓")
+st.write("by Areej, Shreya, Vibha, Mihika")
 
 # Page Configuration
 st.set_page_config(
@@ -35,9 +35,9 @@ S = st.sidebar.slider('How Excited Are You to Be Here?', value = 1,
 st.sidebar.write("Excitement Level", S)
 
 # # main body
-# st.header("Are you a fresh grad who's landed your dream job in a brand new city?")
-# st.subheader("Introducing: GradMove!")
-# st.markdown("Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.")
+st.header("Are you a fresh grad who's landed your dream job in a brand new city?")
+st.subheader("Introducing: GradMove!")
+st.markdown("Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.")
 
 # selectbox for cities
 df = pd.DataFrame({
@@ -51,20 +51,5 @@ option = st.selectbox(
 
 'You selected: ', option
 
-# chatbot page
-with st.sidebar:
-  selectOne = "Housing Hub"
-  selectTwo = "Chat With Us!"
-  selectThree = "Contact"
-  icons = ["house","book","envelope"],
-  menu_icon = "cast",
-  default_index = 0,
-  if selectOne == "Housing Hub":
-    st.title(f"You Have selected {selectOne}")
-    st.header('GradMove')
-  if selectTwo == "Chat With Us":
-    st.title(f"You Have selected {selectTwo}")
-  if selectThree == "Contact":
-    st.title(f"You Have selected {selectThree}")
 
 
