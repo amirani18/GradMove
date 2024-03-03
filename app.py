@@ -91,20 +91,19 @@ def page1():
     )
 
     'You selected: ', option
-     def healthcare_cost(option):
-        # Retrieve the state abbreviation based on the selected city
-        input_city = option
-        input_state = city_to_state.get(input_city)
 
-        # Integrate cost functionality
-        providerCount = provider_by_state(input_state)
-        access_level = categorize_access(providerCount)
-        st.write(f"This state has a {access_level} number of providers:{providerCount}")
+def healthcare_cost(option):
+    # Retrieve the state abbreviation based on the selected city
+    input_city = option
+    input_state = city_to_state.get(input_city)
 
-        # Generate cost chart
-        generate_chart(input_state)
+    # Integrate cost functionality
+    providerCount = provider_by_state(input_state)
+    access_level = categorize_access(providerCount)
+    st.write(f"This state has a {access_level} number of providers:{providerCount}")
 
-
+    # Generate cost chart
+    generate_chart(input_state)
 
 def page2():
     st.header("GradMove 🎓")
