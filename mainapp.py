@@ -48,8 +48,6 @@ city_to_state = {
 
 }
 
-
-
 def page_config():
     """Configures the initial page settings."""
     title = "GradMove"
@@ -72,6 +70,16 @@ def main_body():
     st.subheader("Introducing: GradMove!")
     st.markdown("Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.")
     
+    option = st.selectbox(
+        'Which city do you plan to move to?',
+        df['cities']
+    )
+    
+    st.write('Fetching data for:', option)
+    st.write("Excited to move to", option, "and start your new job?")
+    st.write("Let's get started!")
+
+    st.markdown('---')
     df = pd.DataFrame({
         # add all the cities in the United States
         'cities': ["San Francisco, CA", "Chicago, IL", "New York, NY", "Seattle, WA", "Cambridge, MA", "Boston, MA", "Los Angeles, CA", "Austin, TX", "Denver, CO", "Portland, OR", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA", "Kansas City, MO"]
@@ -93,8 +101,6 @@ def main_body():
             ]
         }
     )
-
-
 
     def info_in_cols():
         # Create two columns
@@ -145,27 +151,8 @@ def main_body():
                 access_level_2 = disp_access_lvl()
                 st.write(f"The access level is {access_level_2} for {input_state} with a score of {score}%.")
             healthcare_access(option)
-            
+
     info_in_cols()
-
-
-
-
-
-
-    
-    option = st.selectbox(
-        'Which city do you plan to move to?',
-        df['cities']
-    )
-    
-    st.write('Fetching data for:', option)
-    st.write("Excited to move to", option, "and start your new job?")
-    st.write("Let's get started!")
-
-    st.markdown('---')
-
-
 
     option2 = ""
 
