@@ -5,10 +5,9 @@ import langchain
 import toml
 import housingDataFunction
 import matplotlib.pyplot as plt
-
-import housingDataFunction
-import matplotlib.pyplot as plt
-
+from salaryData import process_city_data
+from transit import get_walk_score_selenium
+import os
 
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")
@@ -23,11 +22,11 @@ OPENAI_API_KEY = secrets['openai']['api_key']
 config = toml.load('.streamlit/config.toml')
 # Get the theme settings
 theme_settings = config.get('theme', {})
-base_theme = theme_settings.get('base', 'light')
-primary_color = theme_settings.get('primaryColor', '#AA336A')
+base_theme = theme_settings.get('base', 'dark')
+primary_color = theme_settings.get('primaryColor', '#8A9A5B')
 background_color = theme_settings.get('backgroundColor', '#000000')
 secondary_background_color = theme_settings.get('secondaryBackgroundColor', '#f0f2f6')
-text_color = theme_settings.get('textColor', '#AA336A')
+text_color = theme_settings.get('textColor', '#e0218a')
 font = theme_settings.get('font', 'serif')
 
 def page_config():
@@ -53,11 +52,7 @@ def main_body():
     st.markdown("Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.")
     
     df = pd.DataFrame({
-        # add all the cities in the United States
-        'cities': ["San Francisco", "Chicago", "New York", "Seattle", "Cambridge", "Boston", "Los Angeles", "Austin", "Denver", "Portland", "Atlanta", "Dallas", "Philadelphia", "Kansas City",
-                   "Houston", "San Antonio", "Philadelphia", "Phoenix", "Las Vegas", "San Diego", 
-                   "Dallas", "Austin", "San Jose", "Jacksonville", "Indianapolis", "Charlotte",
-                   "Louisville", "Sacramento",'Baltimore'],
+        'cities': ["San Francisco, CA", "Chicago, IL", "New York, NY", "Seattle, WA", "Cambridge, MA", "Atlanta, GA"],
     })
     
     option = st.selectbox(
@@ -65,7 +60,7 @@ def main_body():
         df['cities']
     )
     
-    st.write('You selected:', option)
+    st.write('Fetching data for:', option)
     st.write("Excited to move to", option, "and start your new job?")
     st.write("Let's get started!")
 
@@ -79,11 +74,67 @@ def main_body():
             
             img = housingDataFunction.plot_housing_prices_for_city(city)
             # display png image that it saves
-            for i in img:
-                st.image(i, caption = city, use_column_width = True)
+            st.image(img)
             break
 
+    #one to one hot encoding of cities
+    if option == "San Francisco, CA":
+        option2 = "San Francisco-Oakland-Hayward, CA"
+
+    elif option == "Chicago, IL":
+        option2 = "Chicago-Naperville-Elgin, IL-IN-WI"
+
+    elif option == "New York, NY":
+        option2 = "New York-Newark-Jersey City, NY-NJ-PA"
+
+    elif option == "Seattle, WA":
+        option2 = "Seattle-Tacoma-Bellevue, WA"
+
+    elif option == "Cambridge, MA":
+        option2 = "Boston-Cambridge-Newton, MA-NH"
+
+    elif option == "Atlanta, GA":
+        option2 = "Atlanta-Sandy Springs-Roswell, GA"
+
+    elif option == "Dallas, TX":
+        option2 = "Dallas-Fort Worth-Arlington, TX"
     
+    elif option == "Kansas City, MO":
+        option2 = "Kansas City, MO-KS"
+    
+    elif option == "Philadelphia, PA":  
+        option2 = "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD"
+
+    elif option == "Denver, CO":
+        option2 = "Denver-Aurora-Lakewood, CO"
+
+
+    # salary by occupation 
+    process_city_data(option2)
+    city_csv_file_name = f"{option2.replace(',', '').replace(' ', '_')}_occupations.csv"
+
+    if os.path.exists(city_csv_file_name):
+        # Load the CSV file
+        df = pd.read_csv(city_csv_file_name)
+        
+        # Display the DataFrame in the app
+        st.write(f"Salary Data for {option2}:")
+        st.dataframe(df)
+    else:
+        # If the file doesn't exist, inform the user
+        st.write(f"")
+
+
+    # walkability 
+    walk_data = get_walk_score_selenium(option.split(",")[0], option.split(",")[1].strip())
+    walk_score_image = f"{option.split(',')[0].replace(' ', '_')}_walk_score2.png"
+    appt_for_rent_image = f"{option.split(',')[0].replace(' ', '_')}_appts_to_rent.png"
+
+    st.subheader("Walkability for " + option.split(",")[0])
+    st.image(walk_score_image)
+    st.write(walk_data)
+    
+
 
 def handle_chat_input(user_input, use_langchain=False):
     """Handles the chat input, querying OpenAI or LangChain."""
