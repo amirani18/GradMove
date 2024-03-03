@@ -1,10 +1,24 @@
 import streamlit as st
 import pandas as pd
+import toml
 
 # # Initial page config
 title = "GradMove"
 st.title(title + " 🎓")
 st.write("by Areej, Shreya, Vibha, Mihika")
+
+# Load the config settings from config.toml
+config = toml.load('config.toml')
+
+# Get the theme settings
+theme_settings = config.get('theme', {})
+
+base_theme = theme_settings.get('base', 'light')
+primary_color = theme_settings.get('primaryColor', '#8A9A5B')
+background_color = theme_settings.get('backgroundColor', '#ffffff')
+secondary_background_color = theme_settings.get('secondaryBackgroundColor', '#f0f2f6')
+text_color = theme_settings.get('textColor', '#F4C2C2')
+font = theme_settings.get('font', 'sans serif')
 
 # user inputs on sidebar
 st.sidebar.title("vibes 💖")
