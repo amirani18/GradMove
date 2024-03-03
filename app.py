@@ -99,7 +99,7 @@ def page1():
     def grid():
         random_df = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
 
-        my_grid = grid(2, [2, 4, 1], 1, 4, vertical_align="bottom")
+        my_grid = grid(2, [2, 4, 1], 1, 4)
 
         # Row 1:
         my_grid.dataframe(random_df, use_container_width=True)
