@@ -53,10 +53,7 @@ def main_body():
     
     df = pd.DataFrame({
         # add all the cities in the United States
-        'cities': ["San Francisco", "Chicago", "New York", "Seattle", "Cambridge", "Boston", "Los Angeles", "Austin", "Denver", "Portland", "Atlanta", "Dallas", "Philadelphia", "Kansas City",
-                   "Houston", "San Antonio", "Philadelphia", "Phoenix", "Las Vegas", "San Diego", 
-                   "Dallas", "Austin", "San Jose", "Jacksonville", "Indianapolis", "Charlotte",
-                   "Louisville", "Sacramento",'Baltimore'],
+        'cities': ["San Francisco, CA", "Chicago, IL", "New York, NY", "Seattle, WA", "Cambridge, MA", "Boston, MA", "Los Angeles, CA", "Austin, TX", "Denver, CO", "Portland, OR", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA", "Kansas City, MO"]
     })
     
     option = st.selectbox(
