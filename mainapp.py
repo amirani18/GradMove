@@ -18,7 +18,7 @@ from access import baseline_access, stdev_access, get_score_by_state, identify_a
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")
 
-OPENAI_API_KEY = secrets['openai']['api_key']
+OPENAI_API_KEY = "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"
 
 # how do I enter the api key in the secrets.toml file?
 # [openai]
