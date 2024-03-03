@@ -6,6 +6,9 @@ import toml
 import housingDataFunction
 import matplotlib.pyplot as plt
 
+import housingDataFunction
+import matplotlib.pyplot as plt
+
 
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")

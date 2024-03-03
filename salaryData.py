@@ -22,5 +22,3 @@ def process_city_data(city):
     else:
         print(f"No data available for {city}")
 
-# Example usage
-process_city_data("Sebring, FL")
