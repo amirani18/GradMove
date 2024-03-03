@@ -84,9 +84,13 @@ def identify_access_level(score):
     else:
         return 'Undefined', 'grey'
 
-access_level = identify_access_level(score)
-st.write(f"The access level is {access_level} for {input_state} with a score of {score}%.")
+# display access_level
+def disp_access_lvl():
+    access_level = identify_access_level(score)
+    return access_level
 
+# access_level = identify_access_level(score)
+# st.write(f"The access level is {access_level} for {input_state} with a score of {score}%.")
 
 import plotly.graph_objs as go
 
