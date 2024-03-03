@@ -9,7 +9,6 @@ from salaryData import process_city_data
 from transit import get_walk_score_selenium
 import os
 import time
-
 import kaleido
 from streamlit_extras.grid import grid
 from cost import abs_dev, provider_by_state, categorize_access, generate_chart, cost, title_x, public
@@ -17,12 +16,7 @@ from access import baseline_access, stdev_access, get_score_by_state, identify_a
 
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")
-
-OPENAI_API_KEY = "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"
-
-# how do I enter the api key in the secrets.toml file?
-# [openai]
-# api_key =
+os.environ['OPENAI_API_KEY'] = "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"
 
 # Load the config settings from config.toml
 config = toml.load('.streamlit/config.toml')
