@@ -47,7 +47,9 @@ def provider_by_state(input_state):
         return None
 
 # Get the provider count for the input state
-count = provider_by_state(input_state)
+def count_var(input_state):
+    count = provider_by_state(input_state)
+    return count
 
 #High access to providers: 56+
 #Low access to providers: 0-26
@@ -67,7 +69,9 @@ def categorize_access(count):
     else:
         return 'Undefined'
 
-access_level = categorize_access(count)
+def access_lvl_category(count):
+    access_level = categorize_access(count)
+    return access_level
     
 # Visual for Annual Abortion Cost Saved Through Effective Contraceptives
 title_x = cost[['State', 'Abortion Costs Saved at Title X Funded Centers']]

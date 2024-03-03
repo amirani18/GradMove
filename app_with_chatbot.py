@@ -67,8 +67,6 @@ def main_body():
 
     st.markdown('---')
 
-
-
     option2 = ""
 
     #one to one hot encoding of cities
