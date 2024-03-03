@@ -157,6 +157,9 @@ def main_body():
                 input_city = option
                 input_state = city_to_state.get(input_city)
 
+                # paragraph explaining stats
+                st.write(f"{score} % of counties in this state have no clinics.")
+
                 #Integrate access functionality
                 score = get_score_by_state(input_state)
                 color = identify_access_level(score)
@@ -164,13 +167,13 @@ def main_body():
                 st.image(image_path)
 
                 # baseline access metric
-                baseline = baseline_access()
-                st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
+                # baseline = baseline_access()
+                #st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
 
                 # stdev access metric
-                stdev_val = stdev_access()
-                st.write(f"Standard deviation: {stdev_val:.2f}%")
-                st.write(f"The access level is {color} for {input_state} with a score of {score}%.")
+                # stdev_val = stdev_access()
+                # st.write(f"Standard deviation: {stdev_val:.2f}%")
+                # st.write(f"The access level is {color} for {input_state} with a score of {score}%.")
             healthcare_access(option)
         
         def create_button(url, button_text):
