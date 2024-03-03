@@ -18,7 +18,7 @@ primary_color = theme_settings.get('primaryColor', '#8A9A5B')
 background_color = theme_settings.get('backgroundColor', '#ffffff')
 secondary_background_color = theme_settings.get('secondaryBackgroundColor', '#f0f2f6')
 text_color = theme_settings.get('textColor', '#F4C2C2')
-font = theme_settings.get('font', 'sans serif')
+font = theme_settings.get('font', 'serif')
 
 # user inputs on sidebar
 st.sidebar.title("vibes 💖")
