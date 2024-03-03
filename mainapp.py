@@ -12,7 +12,7 @@ import os
 import kaleido
 from streamlit_extras.grid import grid
 from cost import abs_dev, provider_by_state, categorize_access, generate_chart, cost, title_x, public
-from access import baseline_access, stdev_access, disp_access_lvl, get_score_by_state, identify_access_level, draw_gauge_chart, access
+from access import baseline_access, stdev_access, get_score_by_state, identify_access_level, draw_gauge_chart, access
 
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")
@@ -70,6 +70,28 @@ def main_body():
     st.subheader("Introducing: GradMove!")
     st.markdown("Your go-to app for finding housing near your dream job, curated based on tastes in housing, price, transport, and access to healthcare.")
     
+    df = pd.DataFrame({
+        # add all the cities in the United States
+        'cities': ["San Francisco, CA", "Chicago, IL", "New York, NY", "Seattle, WA", "Cambridge, MA", "Boston, MA", "Los Angeles, CA", "Austin, TX", "Denver, CO", "Portland, OR", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA", "Kansas City, MO"]
+    })
+
+    # df = pd.DataFrame(
+    #     {
+    #         "cities": [
+    #             "San Francisco, CA",
+    #             "Atlanta, GA",
+    #             "Chicago, IL",
+    #             "Seattle, WA",
+    #             "Denver, CO",
+    #             "Kansas City, KS",
+    #             "New York, NY",
+    #             "Austin, TX",
+    #             "Philadelphia, PA",
+    #             "Cambridge, MA",
+    #         ]
+    #     }
+    # )
+    
     option = st.selectbox(
         'Which city do you plan to move to?',
         df['cities']
@@ -80,27 +102,6 @@ def main_body():
     st.write("Let's get started!")
 
     st.markdown('---')
-    df = pd.DataFrame({
-        # add all the cities in the United States
-        'cities': ["San Francisco, CA", "Chicago, IL", "New York, NY", "Seattle, WA", "Cambridge, MA", "Boston, MA", "Los Angeles, CA", "Austin, TX", "Denver, CO", "Portland, OR", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA", "Kansas City, MO"]
-    })
-
-    df = pd.DataFrame(
-        {
-            "cities": [
-                "San Francisco, CA",
-                "Atlanta, GA",
-                "Chicago, IL",
-                "Seattle, WA",
-                "Denver, CO",
-                "Kansas City, KS",
-                "New York, NY",
-                "Austin, TX",
-                "Philadelphia, PA",
-                "Cambridge, MA",
-            ]
-        }
-    )
 
     def info_in_cols():
         # Create two columns
@@ -148,8 +149,7 @@ def main_body():
                 # stdev access metric
                 stdev_val = stdev_access()
                 st.write(f"Standard deviation: {stdev_val:.2f}%")
-                access_level_2 = disp_access_lvl()
-                st.write(f"The access level is {access_level_2} for {input_state} with a score of {score}%.")
+                st.write(f"The access level is {color} for {input_state} with a score of {score}%.")
             healthcare_access(option)
 
     info_in_cols()
@@ -198,10 +198,6 @@ def main_body():
 
     elif option == "Austin, TX":
         option2 = "Austin-Round Rock, TX"
-
-    
-
-
     
     st.subheader("Rent in " + option + " over the years")
     # housingDataFunction.py has the function to plot the median 
@@ -226,8 +222,6 @@ def main_body():
     appt_for_rent_image = f"{option.split(',')[0].replace(' ', '_')}_appts_to_rent.png"
     st.image(appt_for_rent_image)
 
-    
-
     st.markdown('---')
     # salary by occupation 
     if option2 != "":
@@ -246,7 +240,6 @@ def main_body():
         else:
         # If the file doesn't exist, inform the user
             st.write(f"Salary data for {option} is not available. Check back soon!")
-
 
     #walkability 
     st.markdown('---')
@@ -274,8 +267,6 @@ def main_body():
         with open("walkability_data.txt", "r") as file:
             ret_walkability_data = file.read()  
         st.write(ret_walkability_data)
-    
-
 
 def handle_chat_input(user_input, use_langchain=False):
     """Handles the chat input, querying OpenAI or LangChain."""
