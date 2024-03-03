@@ -4,10 +4,11 @@ import numpy as np
 import matplotlib
 import toml
 import kaleido
+import time
 
 from streamlit_extras.grid import grid
-from cost import abs_dev, provider_by_state, categorize_access, generate_chart, cost, title_x, public
-from access import baseline_access, stdev_access, disp_access_lvl, get_score_by_state, identify_access_level, draw_gauge_chart, access
+from cost import abs_dev, count_var, provider_by_state, categorize_access, generate_chart, cost, title_x, public
+from access import baseline_access, stdev_access, get_score_by_state, identify_access_level, draw_gauge_chart, access
 
 # # Initial page config
 title = "GradMove"
@@ -111,6 +112,7 @@ def page1():
                 input_state = city_to_state.get(input_city)
 
                 # Integrate cost functionality
+                count = count_var(input_state)
                 providerCount = provider_by_state(input_state)
                 access_level = categorize_access(providerCount)
 
@@ -143,8 +145,8 @@ def page1():
                 # stdev access metric
                 stdev_val = stdev_access()
                 st.write(f"Standard deviation: {stdev_val:.2f}%")
-                access_level_2 = disp_access_lvl()
-                st.write(f"The access level is {access_level_2} for {input_state} with a score of {score}%.")
+                # access_level_2 = disp_access_lvl()
+                st.write(f"The access level is {color} for {input_state} with a score of {score}%.")
                 
 
             healthcare_access(option)
@@ -184,6 +186,30 @@ def page1():
 def page2():
     st.header("GradMove 🎓")
     st.write("This is Chatbot.")
+
+    progress_variable = 0
+
+    st.title('Progress Bar Example')
+
+    # Function to fetch or update the variable
+    def fetch_variable():
+        global progress_variable
+        # Simulate fetching or updating the variable
+        for i in range(100):
+            progress_variable = i
+            time.sleep(0.1)
+
+    # Run the function that fetches or updates the variable
+    fetch_variable()
+
+    # Display the progress bar and update based on the fetched variable
+    progress_bar = st.progress(progress_variable + 1)
+
+    while progress_variable < 100:
+        progress_bar.progress(progress_variable + 1)
+        time.sleep(0.1)
+
+    st.write('Process has completed!')
 
     # Create two columns
     col1, col2 = st.columns(2)
