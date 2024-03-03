@@ -67,8 +67,6 @@ def categorize_access(count):
         return 'Undefined'
 
 access_level = categorize_access(count)
-print(f"This state has a {access_level} number of providers: {count}")
-
     
 # Visual for Annual Abortion Cost Saved Through Effective Contraceptives
 title_x = cost[['State', 'Abortion Costs Saved at Title X Funded Centers']]
