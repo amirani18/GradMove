@@ -152,6 +152,8 @@ def main_body():
         if os.path.exists(city_csv_file_name):
         # Load the CSV file
             df = pd.read_csv(city_csv_file_name)
+            # change the column names
+            df.columns = ['Area', 'Hourly Mean Wage', 'Annual Mean Wage', 'Occupation']
         
         # Display the DataFrame in the app
             st.subheader(f"Salary Data for {option}:")
@@ -169,13 +171,19 @@ def main_body():
 
     #appt_for_rent_image = f"{option.split(',')[0].replace(' ', '_')}_appts_to_rent.png"
 
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([1, 3])
 
     #st.image(walk_score_image)
     with open(walk_score_image, 'r', encoding='utf-8') as file:
         svg_content = file.read()
+    centered_scaled_svg_content = f'''
+<div style="text-align: center;">
+    <div style="width: 100%; display: inline-block;">{svg_content}</div>
+</div>
+'''
     with col1:
-        st.markdown(svg_content, unsafe_allow_html=True)
+        # Center the image
+        st.markdown(centered_scaled_svg_content, unsafe_allow_html=True)
     with col2:
         #read from file called walkability_data.txt
         with open("walkability_data.txt", "r") as file:
