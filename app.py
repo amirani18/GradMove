@@ -131,7 +131,9 @@ def page1():
 
                 #Integrate access functionality
                 score = get_score_by_state(input_state)
-                access_level = identify_access_level(score)
+                color = identify_access_level(score)
+                image_path = draw_gauge_chart(score)
+                st.image(image_path)
 
                 # baseline access metric
                 baseline = baseline_access()
@@ -142,7 +144,7 @@ def page1():
                 st.write(f"Standard deviation: {stdev_val:.2f}%")
                 access_level_2 = disp_access_lvl()
                 st.write(f"The access level is {access_level_2} for {input_state} with a score of {score}%.")
-                draw_gauge_chart(input_state, "Clinic Accessibility")
+                
 
             healthcare_access(option)
 
