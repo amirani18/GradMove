@@ -102,7 +102,7 @@ def page1():
 
         # Display different information in each column
         with col1:
-            st.write("Information for column 1")
+            st.subheader("Healthcare Cost 💸")
             # healthcare_cost func
             def healthcare_cost(option):
                 # Retrieve the state abbreviation based on the selected city
@@ -123,7 +123,7 @@ def page1():
             healthcare_cost(option)
 
         with col2:
-            st.write("Information for column 2")
+            st.subheader("Healthcare Access 🔓")
             # healthcare_access func
             def healthcare_access(option):
                 input_city = option
