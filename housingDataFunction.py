@@ -5,12 +5,12 @@ import matplotlib.ticker as ticker
 
 def plot_housing_prices_for_city(city):
     # read csv file into pandas dataframe
-    housing = pd.read_csv('/archive/City_MedianRentalPrice_1Bedroom.csv')
-    housing2 = pd.read_csv('/archive/City_MedianRentalPrice_2Bedroom.csv')
-    housing3 = pd.read_csv('/archive/City_MedianRentalPrice_3Bedroom.csv')
-    housing4 = pd.read_csv('/archive/City_MedianRentalPrice_4Bedroom.csv')
+    housing = pd.read_csv('archive/City_MedianRentalPrice_1Bedroom.csv')
+    housing2 = pd.read_csv('archive/City_MedianRentalPrice_2Bedroom.csv')
+    housing3 = pd.read_csv('archive/City_MedianRentalPrice_3Bedroom.csv')
+    housing4 = pd.read_csv('archive/City_MedianRentalPrice_4Bedroom.csv')
 
-    i = 1
+    bedroom_count = 1  # Use a different variable for the filename index
     list_images = []
     for h in [housing, housing2, housing3, housing4]:
         housing_cities = h[h['Metro'] == city]
@@ -21,24 +21,26 @@ def plot_housing_prices_for_city(city):
 
         x_values = housing_cities.columns[6:]
         y_values = housing_cities[housing_cities['Metro'] == city].iloc[0, 6:]
-        # y_values if giving me index out of bounds error, why
-        # I think it's because the data is not being read in properly
-        # I need to check the data types of the columns
 
-        plt.plot(x_values, y_values, label=city, color = 'pink', linewidth = 2.5)
+        plt.plot(x_values, y_values, label=city, color='pink', linewidth=2.5)
         plt.xlabel('Year-Month')
         plt.ylabel('Price')
-        plt.title(f'Median Rental Price {i} Bedroom')
+        plt.title(f'Median Rental Price {bedroom_count} Bedroom')
         plt.tick_params(axis='x', which='major', labelsize=8)
         plt.gca().xaxis.set_major_locator(ticker.MaxNLocator(nbins=10))
         plt.xticks(rotation=45)
         plt.legend()
-        # save plot to png
-        plt.savefig(f'/City_MedianRentalPrice_{i}Bedroom_Cities_filtered.png')
-        list_images.append(f'City_MedianRentalPrice_{i}Bedroom_Cities_filtered.png')    
-        i += 1
+        
+        # Save plot to png
+        filename = f'City_MedianRentalPrice_{bedroom_count}Bedroom_Cities_filtered.png'
+        plt.savefig(filename)
+        list_images.append(filename)
+        
+        plt.clf()  # Clear the figure for the next plot
+        bedroom_count += 1  # Increment the bedroom count for the next filename
+
     return list_images
        
     
 # Example usage
-plot_housing_prices_for_city("New York-Newark-Jersey City")
+#plot_housing_prices_for_city("New York-Newark-Jersey City")
