@@ -78,7 +78,7 @@ def main_body():
     df = pd.DataFrame({
         # add all the cities in the United States
         'cities': ["San Francisco, CA", "Chicago, IL", "New York, NY", "Seattle, WA", "Cambridge, MA", "Boston, MA", 
-                   "Los Angeles, CA", "Austin, TX", "Denver, CO", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA]
+                   "Los Angeles, CA", "Austin, TX", "Denver, CO", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA"]
     })
 
     # df = pd.DataFrame(
