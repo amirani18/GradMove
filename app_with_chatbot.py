@@ -4,7 +4,7 @@ import openai
 import langchain
 
 # Define your OpenAI API Key
-OPENAI_API_KEY = ""  # For production, use st.secrets to manage your API key securely
+OPENAI_API_KEY = "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"  # For production, use st.secrets to manage your API key securely
 
 def page_config():
     """Configures the initial page settings."""
