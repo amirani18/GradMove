@@ -79,7 +79,8 @@ def main_body():
             
             img = housingDataFunction.plot_housing_prices_for_city(city)
             # display png image that it saves
-            st.image(img)
+            for i in img:
+                st.image(i, caption = city, use_column_width = True)
             break
 
     
