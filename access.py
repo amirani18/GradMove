@@ -30,12 +30,23 @@ def baseline_access():
     return baseline
 
 
-baseline = access['(%) Counties without Clinic'].mean()
-stdev = access['(%) Counties without Clinic'].std()
+    # baseline = access['(%) Counties without Clinic'].mean()
+
+def stdev_access():
+    #Data cleaning for access csv
+    county_counts = {'California': 58, 'Georgia': 159, 'Illinois': 102, 'Washington': 39,  'Colorado': 64, 'Kansas': 105, 
+                    'New York': 62, 'Texas': 254, 'Pennsylvania': 67, 'Massachusetts': 14}
+
+    # Map county counts to states
+    access['County Count Per State'] = access['State'].map(county_counts)
+    stdev_val = access['(%) Counties without Clinic'].std()
+    return stdev_val
+
+# stdev = access['(%) Counties without Clinic'].std()
 
 # Display baseline and standard deviation
 # st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
-st.write(f"Standard deviation: {stdev:.2f}%")
+# st.write(f"Standard deviation: {stdev:.2f}%")
 
 #Considering the mean is 71.8, avg access is 47-71, low access is 71-95, high access = <0-47
 #Shade background red based on low, yellow based on avg, and green based on high?

@@ -6,7 +6,7 @@ import toml
 
 from streamlit_extras.grid import grid
 from cost import abs_dev, provider_by_state, categorize_access, generate_chart, cost, title_x, public
-from access import baseline_access, get_score_by_state, identify_access_level, draw_gauge_chart, access
+from access import baseline_access, stdev_access, get_score_by_state, identify_access_level, draw_gauge_chart, access
 
 # # Initial page config
 title = "GradMove"
@@ -137,6 +137,9 @@ def page1():
                 baseline = baseline_access()
                 st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
 
+                # stdev access metric
+                stdev_val = stdev_access()
+                st.write(f"Standard deviation: {stdev_val:.2f}%")
                 draw_gauge_chart(input_state, "Clinic Accessibility")
 
             healthcare_access(option)
