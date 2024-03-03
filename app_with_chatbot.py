@@ -65,21 +65,9 @@ def main_body():
     st.write("Excited to move to", option, "and start your new job?")
     st.write("Let's get started!")
 
+    st.markdown('---')
 
-    
-    st.subheader("Median Rent Prices for 1-Bedroom Apartments")
-    # housingDataFunction.py has the function to plot the median 
-    # rent prices for 1-bedroom apartments through the years
-    for city in ['Atlanta-Sandy Springs-Roswell', 'Dallas-Fort Worth-Arlington', 'Chicago-Naperville-Elgin', 'New York-Newark-Jersey City', 'Kansas City', 
-          'Philadelphia-Camden-Wilmington', 'Denver-Aurora-Lakewood', 'Seattle-Tacoma-Bellevue', 'Boston-Cambridge-Newton', 'San Francisco-Oakland-Hayward']:
-        if (option.split(","))[0] in city:
-            st.write(city)
-            
-            img = housingDataFunction.plot_housing_prices_for_city(city)
-            # display png image that it saves
-            for j in img:
-                st.image(j)
-            break
+
 
     option2 = ""
 
@@ -129,6 +117,33 @@ def main_body():
     
 
 
+    
+    st.subheader("Rent in " + option + " over the years")
+    # housingDataFunction.py has the function to plot the median 
+    # rent prices for 1-bedroom apartments through the years
+    for city in ['Atlanta-Sandy Springs-Roswell', 'Dallas-Fort Worth-Arlington', 'Chicago-Naperville-Elgin', 'New York-Newark-Jersey City', 'Kansas City', 
+          'Philadelphia-Camden-Wilmington', 'Denver-Aurora-Lakewood', 'Seattle-Tacoma-Bellevue', 'Boston-Cambridge-Newton', 'San Francisco-Oakland-Hayward']:
+        if (option.split(","))[0] in city:
+            st.write(city)
+            
+            img = housingDataFunction.plot_housing_prices_for_city(city)
+            # display png image that it saves
+            for j in img:
+                st.image(j)
+            break
+
+    st.markdown('---')
+    #add space before this element
+    st.write('\n')  # Add a new line for spacing
+    st.subheader("Appartments to rent nearby")
+    #get_walk_score_selenium(city, state_code)
+    get_walk_score_selenium(option.split(",")[0], option.split(",")[1].strip())
+    appt_for_rent_image = f"{option.split(',')[0].replace(' ', '_')}_appts_to_rent.png"
+    st.image(appt_for_rent_image)
+
+    
+
+    st.markdown('---')
     # salary by occupation 
     if option2 != "":
         process_city_data(option2)
@@ -147,11 +162,12 @@ def main_body():
 
 
     #walkability 
+    st.markdown('---')
     st.subheader(f"Walkability for {option}")
-    get_walk_score_selenium(option.split(",")[0], option.split(",")[1].strip())
+    #get_walk_score_selenium(option.split(",")[0], option.split(",")[1].strip())
     walk_score_image = f"{option.split(',')[0].replace(' ', '_')}_walk_score2.svg"
 
-    appt_for_rent_image = f"{option.split(',')[0].replace(' ', '_')}_appts_to_rent.png"
+    #appt_for_rent_image = f"{option.split(',')[0].replace(' ', '_')}_appts_to_rent.png"
 
     col1, col2 = st.columns(2)
 

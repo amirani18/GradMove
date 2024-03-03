@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import requests
 import os
@@ -21,7 +22,13 @@ def download_svg(svg_url, save_path):
             file.write(response.text)
 
 def get_walk_score_selenium(city, state_code):
+     # Configure Chrome options
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Add the headless argument
+    chrome_options.add_argument("--disable-gpu")  # Optional argument, recommended for headless
     service = Service(ChromeDriverManager().install())
+
+
     driver = webdriver.Chrome(service=service)
     url = f"https://www.walkscore.com/{state_code}/{city.replace(' ', '_')}"
 
@@ -45,7 +52,6 @@ def get_walk_score_selenium(city, state_code):
             EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div/div/div[2]/div/div[2]/p[1]"))
         ))
 
-        
 
         walkability_data2 = wait.until((
             EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div/div/div[2]/div/div[2]/p[2]"))
@@ -89,6 +95,4 @@ def get_walk_score_selenium(city, state_code):
     finally:
         driver.quit()
 
-
-get_walk_score_selenium("Boston", "MA")
         
