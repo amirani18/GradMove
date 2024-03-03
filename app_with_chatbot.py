@@ -15,11 +15,10 @@ config = toml.load('.streamlit/config.toml')
 theme_settings = config.get('theme', {})
 base_theme = theme_settings.get('base', 'light')
 primary_color = theme_settings.get('primaryColor', '#8A9A5B')
-background_color = theme_settings.get('backgroundColor', '#ffffff')
+background_color = theme_settings.get('backgroundColor', '#000000')
 secondary_background_color = theme_settings.get('secondaryBackgroundColor', '#f0f2f6')
 text_color = theme_settings.get('textColor', '#e0218a')
 font = theme_settings.get('font', 'serif')
-
 
 def page_config():
     """Configures the initial page settings."""
