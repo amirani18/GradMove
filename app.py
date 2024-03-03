@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib
 import toml
+import kaleido
 
 from streamlit_extras.grid import grid
 from cost import abs_dev, provider_by_state, categorize_access, generate_chart, cost, title_x, public
