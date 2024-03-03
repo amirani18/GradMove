@@ -51,6 +51,7 @@ city_to_state = {
 
 def page_config():
     """Configures the initial page settings."""
+    # st.image("gradmove_white_logo-removebg.png", use_column_width=True)
     title = "GradMove"
     st.title(f"{title} 🎓")
     st.write("by Areej, Shreya, Vibha, Mihika")
@@ -58,6 +59,7 @@ def page_config():
 
 def user_inputs():
     """Handles user inputs in the sidebar and displays chat responses."""
+    st.sidebar.image('gradmove_white_logo-removebg.png', use_column_width=True)
     excitement_level = st.sidebar.slider('How Excited Are You to Be Here?', 1, 10, 100)
     st.sidebar.write("Excitement Level", excitement_level)
     chat_input = st.sidebar.text_input("Ask me anything:")
