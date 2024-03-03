@@ -11,7 +11,7 @@ st.title(title + " 🎓")
 st.write("by Areej, Shreya, Vibha, Mihika")
 
 # Load the config settings from config.toml
-config = toml.load('config.toml')
+config = toml.load('.streamlit/config.toml')
 
 # Get the theme settings
 theme_settings = config.get('theme', {})
