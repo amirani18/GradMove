@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 import toml
 
-from cost import provider_by_state, categorize_access,
-generate_chart, cost, title_x, public
+from cost import provider_by_state, categorize_access, generate_chart, cost, title_x, public
 
 # # Initial page config
 title = "GradMove"
@@ -63,6 +62,7 @@ city_to_state = {
     "Cambridge, MA": "Massachusetts",
 
 }
+
 def page1():
     st.header("GradMove 🎓")
     st.write("Welcome to Housing Hub!")
@@ -89,17 +89,17 @@ def page1():
         df['cities']
     )
 
-  'You selected: ', option
-   input_city = option
-   input_state = city_to_state.get(input_city)
+    'You selected: ', option
+    input_city = option
+    input_state = city_to_state.get(input_city)
 
-  # Integrate cost functionality
-   providerCount = provider_by_state(input_state)
-   access_level = categorize_access(providerCount)
-   st.write(f"This state has a {access_level} number of providers:{providerCount}")
+    # Integrate cost functionality
+    providerCount = provider_by_state(input_state)
+    access_level = categorize_access(providerCount)
+    st.write(f"This state has a {access_level} number of providers:{providerCount}")
 
-  #Generate cost chart
-   generate_chart(input_state)
+    #Generate cost chart
+    generate_chart(input_state)
 
 
 
