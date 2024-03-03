@@ -2,10 +2,12 @@ import streamlit as st
 import pandas as pd
 import openai
 import langchain
+import toml
 
 # Define your OpenAI API Key
+secrets = toml.load("secrets.toml")
 
-OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]  # For production, use st.secrets to manage your API key securely
+OPENAI_API_KEY = secrets["openai"]["api_key"]
 
 def page_config():
     """Configures the initial page settings."""
