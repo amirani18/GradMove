@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from salaryData import process_city_data
 from transit import get_walk_score_selenium
 import os
+import time
 
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")
@@ -61,7 +62,25 @@ def main_body():
         df['cities']
     )
     
-    st.write('Fetching data for:', option)
+    # st.write('You chose:', option)
+    @st.cache_data
+    def fetch_variable():
+        time.sleep(5)  # Simulating a delay
+        return True
+
+    with st.spinner('Fetching variable...'):
+        variable = fetch_variable()
+
+    st.write('Fetched variable:', option)
+    # @st.cache_data
+    # def fetch_variable():
+    #     time.sleep(5)  # Simulating a delay
+    #     return option
+
+    # with st.spinner('Fetching data...'):
+    #     variable = fetch_variable()
+
+    st.write('Found:', variable)
     st.write("Excited to move to", option, "and start your new job?")
     st.write("Let's get started!")
 

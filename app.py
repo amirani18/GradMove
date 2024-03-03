@@ -187,29 +187,39 @@ def page2():
     st.header("GradMove 🎓")
     st.write("This is Chatbot.")
 
-    progress_variable = 0
-
-    st.title('Progress Bar Example')
-
-    # Function to fetch or update the variable
+    @st.cache_data
     def fetch_variable():
-        global progress_variable
-        # Simulate fetching or updating the variable
-        for i in range(100):
-            progress_variable = i
-            time.sleep(0.1)
+        time.sleep(5)  # Simulating a delay
+        return 42
 
-    # Run the function that fetches or updates the variable
-    fetch_variable()
+    with st.spinner('Fetching variable...'):
+        variable = fetch_variable()
 
-    # Display the progress bar and update based on the fetched variable
-    progress_bar = st.progress(progress_variable + 1)
+    st.write('Fetched variable:', variable)
 
-    while progress_variable < 100:
-        progress_bar.progress(progress_variable + 1)
-        time.sleep(0.1)
+    # progress_variable = 0
 
-    st.write('Process has completed!')
+    # st.title('Progress Bar Example')
+
+    # # Function to fetch or update the variable
+    # def fetch_variable():
+    #     global progress_variable
+    #     # Simulate fetching or updating the variable
+    #     for i in range(5):
+    #         progress_variable = i
+    #         time.sleep(0.1)
+
+    # # Run the function that fetches or updates the variable
+    # fetch_variable()
+
+    # # Display the progress bar and update based on the fetched variable
+    # progress_bar = st.progress(progress_variable + 1)
+
+    # while progress_variable < 100:
+    #     progress_bar.progress(progress_variable + 1)
+    #     time.sleep(0.1)
+
+    # st.write('Process has completed!')
 
     # Create two columns
     col1, col2 = st.columns(2)
