@@ -67,7 +67,8 @@ city_to_state = {
 def page1():
     st.header("GradMove 🎓")
     st.write("Welcome to Housing Hub!")
-     # selectbox for cities
+
+    # selectbox for cities
     df = pd.DataFrame(
         {
             "cities": [
@@ -103,7 +104,18 @@ def page1():
         st.write(f"This state has a {access_level} number of providers:{providerCount}")
 
         # Generate cost chart
-        generate_chart(input_state)
+        chart = generate_chart(input_state)
+        # Create two columns
+        col1, col2 = st.columns(2)
+
+        # Display an image in the first column
+        with col1:
+            st.subheader('Image in Column 1')
+
+        # Display a different image in the second column
+        with col2:
+            st.subheader('Image in Column 2')
+            st.image(chart, caption='cost of providers in state')
 
     healthcare_cost(option)
 
