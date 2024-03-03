@@ -129,6 +129,8 @@ def healthcare_access(option):
 
         draw_gauge_chart(input_state, "Clinic Accessibility")
 
+healthcare_access(option)
+
 def page2():
     st.header("GradMove 🎓")
     st.write("This is Chatbot.")
