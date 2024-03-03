@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib
 import toml
+import kaleido
 
 from streamlit_extras.grid import grid
 from cost import abs_dev, provider_by_state, categorize_access, generate_chart, cost, title_x, public
@@ -102,7 +103,7 @@ def page1():
 
         # Display different information in each column
         with col1:
-            st.write("Information for column 1")
+            st.subheader("Healthcare Cost 💸")
             # healthcare_cost func
             def healthcare_cost(option):
                 # Retrieve the state abbreviation based on the selected city
@@ -123,7 +124,7 @@ def page1():
             healthcare_cost(option)
 
         with col2:
-            st.write("Information for column 2")
+            st.subheader("Healthcare Access 🔓")
             # healthcare_access func
             def healthcare_access(option):
                 input_city = option
@@ -131,7 +132,9 @@ def page1():
 
                 #Integrate access functionality
                 score = get_score_by_state(input_state)
-                access_level = identify_access_level(score)
+                color = identify_access_level(score)
+                image_path = draw_gauge_chart(score)
+                st.image(image_path)
 
                 # baseline access metric
                 baseline = baseline_access()
@@ -142,7 +145,7 @@ def page1():
                 st.write(f"Standard deviation: {stdev_val:.2f}%")
                 access_level_2 = disp_access_lvl()
                 st.write(f"The access level is {access_level_2} for {input_state} with a score of {score}%.")
-                draw_gauge_chart(input_state, "Clinic Accessibility")
+                
 
             healthcare_access(option)
 
