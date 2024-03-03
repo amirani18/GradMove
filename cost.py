@@ -7,17 +7,10 @@ import numpy as np
 
 #Reading in data
 
-# access = pd.read_csv('access.csv')
 cost = pd.read_csv('archive/cost.csv')
 
-#Data cleaning for cost csv
-
-# baseline abortion provider (across all states - not the best but just get something working)
-
+#Data cleaning and preparation
 baseline = cost['No. of abortion providers'].median()
-
-#Because California skewed the mean, I am using median.
-#On average, tech hub cities have around 40 abortion providers. 
 
 #Standard deviation:
 copy = cost.copy()
@@ -29,7 +22,7 @@ copy = [x for x in data if x not in outliers]
 absolute_deviations = [abs(x - baseline) for x in copy]
 variance = np.mean(np.square(absolute_deviations))
 std_based_on_median = np.sqrt(variance)
-print("Standard deviation based on the median after removing outliers:", std_based_on_median)
+st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
 
 #Determine access intervals 
 #On average, tech hubs differ by 15 in terms of abortion providers
@@ -86,7 +79,7 @@ def generate_chart(input_state):
     count = provider_by_state(input_state)
     if count is not None:
         access_level = categorize_access(count)
-        print(f"This state has a {access_level} number of providers: {count}")
+        st.write(f"This state has a {access_level} number of providers: {count}")
         
         # Filter the data for the given state
         state_data = cost[cost['State'] == input_state]
@@ -95,71 +88,53 @@ def generate_chart(input_state):
         
         # Check if costs saved in either Title X or public are less than $5
         if title_x < 5 and public < 5:
-            print(f"Due to limited abortion options, the abortion costs via Title X are {title_x}.")
-            print(f"Due to limited abortion options, the abortion costs via public centers are {public}.")
+            st.write(f"Due to limited abortion options, the abortion costs via Title X are {title_x}.")
+            st.write(f"Due to limited abortion options, the abortion costs via public centers are {public}.")
             
             
         elif title_x < 5 or public < 5:
-            print(f"Due to limited abortion options, the abortion costs ($) via Title X are {title_x}")
-            print(f"Due to limited abortion options, the abortion costs ($) via public centers are {public}")
+            st.write(f"Due to limited abortion options, the abortion costs ($) via Title X are {title_x}")
+            st.write(f"Due to limited abortion options, the abortion costs ($) via public centers are {public}")
             
         else:
             if access_level == "Low":
-                plt.figure(figsize=(8, 6))
+                fig, ax = plt.subplots(figsize=(8, 6))
                 bar_width = 0.35
-                plt.bar(0, title_x, color='skyblue', width=bar_width, edgecolor='grey', label='Title X Funded Centers')
-                plt.bar(1, public, color='salmon', width=bar_width, edgecolor='grey', label='Publicly Funded Centers')
-
-            # Add title and axis labels
-                plt.xlabel('Funding Source', fontsize=12, fontweight='bold')
-                plt.ylabel('Cost ($)', fontsize=12, fontweight='bold')
-                plt.title(f"Average Abortion Costs Saved in {input_state}", fontsize=14, fontweight='bold')
-
-    # Customize ticks and legend
-                plt.xticks([0, 1], ['Title X', 'Public'], fontsize=10)
-                plt.yticks(fontsize=10)
-                plt.legend(fontsize=10)
-
-    # Display the chart
+                ax.bar(0, title_x, color='skyblue', width=bar_width, edgecolor='grey', label='Title X Funded Centers')
+                ax.bar(1, public, color='salmon', width=bar_width, edgecolor='grey', label='Publicly Funded Centers')
+                ax.set_xlabel('Funding Source', fontsize=12, fontweight='bold')
+                ax.set_ylabel('Cost ($)', fontsize=12, fontweight='bold')
+                ax.set_title(f"Average Abortion Costs Saved in {input_state}", fontsize=14, fontweight='bold')
+                ax.set_xticks([0, 1])
+                ax.set_xticklabels(['Title X', 'Public'])
+                ax.legend()
                 plt.tight_layout()
-                plt.show()
+                st.pyplot(fig)
             elif access_level == "Avg":
-                plt.figure(figsize=(8, 6))
+                fig, ax = plt.subplots(figsize=(8, 6))
                 bar_width = 0.35
-                plt.bar(0, title_x, color='skyblue', width=bar_width, edgecolor='grey', label='Title X Funded Centers')
-                plt.bar(1, public, color='salmon', width=bar_width, edgecolor='grey', label='Publicly Funded Centers')
-
-    # Add title and axis labels
-                plt.xlabel('Funding Source', fontsize=12, fontweight='bold')
-                plt.ylabel('Cost ($)', fontsize=12, fontweight='bold')
-                plt.title(f"Average Abortion Costs Saved in {input_state}", fontsize=14, fontweight='bold')
-
-    # Customize ticks and legend
-                plt.xticks([0, 1], ['Title X', 'Public'], fontsize=10)
-                plt.yticks(fontsize=10)
-                plt.legend(fontsize=10)
-
-    # Display the chart
+                ax.bar(0, title_x, color='skyblue', width=bar_width, edgecolor='grey', label='Title X Funded Centers')
+                ax.bar(1, public, color='salmon', width=bar_width, edgecolor='grey', label='Publicly Funded Centers')
+                ax.set_xlabel('Funding Source', fontsize=12, fontweight='bold')
+                ax.set_ylabel('Cost ($)', fontsize=12, fontweight='bold')
+                ax.set_title(f"Average Abortion Costs Saved in {input_state}", fontsize=14, fontweight='bold')
+                ax.set_xticks([0, 1])
+                ax.set_xticklabels(['Title X', 'Public'])
+                ax.legend()
                 plt.tight_layout()
-                plt.show()
+                st.pyplot(fig)
             else:
-                plt.figure(figsize=(8, 6))
+                fig, ax = plt.subplots(figsize=(8, 6))
                 bar_width = 0.35
-                plt.bar(0, title_x, color='skyblue', width=bar_width, edgecolor='grey', label='Title X Funded Centers')
-                plt.bar(1, public, color='salmon', width=bar_width, edgecolor='grey', label='Publicly Funded Centers')
-
-    # Add title and axis labels
-                plt.xlabel('Funding Source', fontsize=12, fontweight='bold')
-                plt.ylabel('Cost ($)', fontsize=12, fontweight='bold')
-                plt.title(f"Average Abortion Costs Saved in {input_state}", fontsize=14, fontweight='bold')
-
-    # Customize ticks and legend
-                plt.xticks([0, 1], ['Title X', 'Public'], fontsize=10)
-                plt.yticks(fontsize=10)
-                plt.legend(fontsize=10)
-
-    # Display the chart
+                ax.bar(0, title_x, color='skyblue', width=bar_width, edgecolor='grey', label='Title X Funded Centers')
+                ax.bar(1, public, color='salmon', width=bar_width, edgecolor='grey', label='Publicly Funded Centers')
+                ax.set_xlabel('Funding Source', fontsize=12, fontweight='bold')
+                ax.set_ylabel('Cost ($)', fontsize=12, fontweight='bold')
+                ax.set_title(f"Average Abortion Costs Saved in {input_state}", fontsize=14, fontweight='bold')
+                ax.set_xticks([0, 1])
+                ax.set_xticklabels(['Title X', 'Public'])
+                ax.legend()
                 plt.tight_layout()
-                plt.show()
+                st.pyplot(fig)
                 
 
