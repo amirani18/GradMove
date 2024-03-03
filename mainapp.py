@@ -19,6 +19,7 @@ secrets = toml.load(".streamlit/secrets.toml")
 os.environ['OPENAI_API_KEY'] = "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"
 openai_api_key = os.environ.get('OPENAI_API_KEY')
 
+
 # Load the config settings from config.toml
 config = toml.load('.streamlit/config.toml')
 # Get the theme settings
@@ -53,14 +54,12 @@ def page_config():
     st.title(f"{title} 🎓")
     st.subheader("Embark on Your Next Chapter with Confidence.")
     st.write("by Areej, Shreya, Vibha, Mihika")
-    st.text("GradMove is here to streamline your transition from college to career.")
-    st.text("As you prepare to start your first job in a new city,")
-    st.text("we understand the whirlwind of questions and decisions you face.")
-    st.text("Where will you live? How will you commute?")
-    st.text("What healthcare options are available?")
-    st.text("GradMove is your dedicated companion, designed to fast-forward")
-    st.text("through the initial, overwhelming searches and present")
-    st.text("you with clear, concise, and crucial information about your future home.")
+    st.markdown(
+    """
+    <p style='color: #desd83; font-family: verdana, sans-serif;'>GradMove is here to streamline your transition from college to career. As you prepare to start your first job in a new city, we understand the whirlwind of questions and decisions you face. Where will you live? How will you commute? What healthcare options are available? GradMove is your dedicated companion, designed to fast-forward through the initial, overwhelming searches and present you with clear, concise, and crucial information about your future home.</p>
+    """,
+    unsafe_allow_html=True
+)
     st.sidebar.title("Vibes 💖")
 
 def user_inputs():
@@ -69,6 +68,7 @@ def user_inputs():
     excitement_level = st.sidebar.slider('How Excited Are You to Be Here?', 1, 10, 100)
     st.sidebar.write("Excitement Level", excitement_level)
     chat_input = st.sidebar.text_input("Ask me anything:")
+    st.sidebar.write("Chatbot disabled :((")
     if chat_input:
         response = handle_chat_input(chat_input, use_langchain=False)  # Adjust use_langchain based on your setup
         st.sidebar.write("Response:", response)
@@ -138,15 +138,6 @@ def main_body():
                 # Retrieve the state abbreviation based on the selected city
                 input_city = option
                 input_state = city_to_state.get(input_city)
-
-                # Integrate cost functionality
-                # providerCount = provider_by_state(input_state)
-                # access_level = categorize_access(providerCount)
-
-                # Calculate the absolute deviations from the median
-                # std_based_on_median = abs_dev()
-                # st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
-                # st.write(f"This state has a {access_level} number of providers:{providerCount}")
                 
                 # Generate cost chart
                 st.write("Abortion costs dependant on location.")
@@ -170,15 +161,6 @@ def main_body():
                 # display
                 image_path = draw_gauge_chart(score)
                 st.image(image_path)
-
-                # baseline access metric
-                # baseline = baseline_access()
-                #st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
-
-                # stdev access metric
-                # stdev_val = stdev_access()
-                # st.write(f"Standard deviation: {stdev_val:.2f}%")
-                # st.write(f"The access level is {color} for {input_state} with a score of {score}%.")
             healthcare_access(option)
 
     info_in_cols()
