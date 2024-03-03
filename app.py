@@ -4,6 +4,7 @@ import matplotlib
 import toml
 
 from cost import provider_by_state, categorize_access, generate_chart, cost, title_x, public
+from access import get_score_by_state, identify_access_level, draw_gauge_chart, access
 
 # # Initial page config
 title = "GradMove"
