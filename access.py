@@ -7,7 +7,7 @@ import numpy as np
 
 #Reading in data
 
-access = pd.read_csv('access.csv')
+access = pd.read_csv('/archive/access.csv')
 
 #Data cleaning for access csv
 
