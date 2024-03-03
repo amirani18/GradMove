@@ -10,11 +10,9 @@ secrets = toml.load(".streamlit/secrets.toml")
 OPENAI_API_KEY = secrets['openai']['api_key']
 
 # Load the config settings from config.toml
-config = toml.load('config.toml')
-
+config = toml.load('.streamlit/config.toml')
 # Get the theme settings
 theme_settings = config.get('theme', {})
-
 base_theme = theme_settings.get('base', 'light')
 primary_color = theme_settings.get('primaryColor', '#8A9A5B')
 background_color = theme_settings.get('backgroundColor', '#ffffff')
