@@ -3,6 +3,7 @@ import pandas as pd
 import openai
 import langchain
 import toml
+import matplotlib
 
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")

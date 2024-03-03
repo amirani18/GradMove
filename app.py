@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib
 import toml
 
 from cost import provider_by_state, categorize_access, generate_chart, cost, title_x, public
