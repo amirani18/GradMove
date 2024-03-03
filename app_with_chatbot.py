@@ -65,6 +65,8 @@ def main_body():
     st.write("Excited to move to", option, "and start your new job?")
     st.write("Let's get started!")
 
+
+    
     st.subheader("Median Rent Prices for 1-Bedroom Apartments")
     # housingDataFunction.py has the function to plot the median 
     # rent prices for 1-bedroom apartments through the years
@@ -111,27 +113,42 @@ def main_body():
 
     elif option == "Denver, CO":
         option2 = "Denver-Aurora-Lakewood, CO"
+    
+    elif option == "Boston, MA":
+        option2 = "Boston-Cambridge-Newton, MA-NH"
+    
+    elif option == "Portland, OR":
+        option2 = "Portland-Vancouver-Hillsboro, OR-WA"
+
+    elif option == "Los Angeles, CA":
+        option2 = "Los Angeles-Long Beach-Anaheim, CA"
+
+    elif option == "Austin, TX":
+        option2 = "Austin-Round Rock, TX"
+
+    
 
 
     # salary by occupation 
-    process_city_data(option2)
-    city_csv_file_name = f"{option2.replace(',', '').replace(' ', '_')}_occupations.csv"
+    if option2 != "":
+        process_city_data(option2)
+        city_csv_file_name = f"{option2.replace(',', '').replace(' ', '_')}_occupations.csv"
 
-    if os.path.exists(city_csv_file_name):
+        if os.path.exists(city_csv_file_name):
         # Load the CSV file
-        df = pd.read_csv(city_csv_file_name)
+            df = pd.read_csv(city_csv_file_name)
         
         # Display the DataFrame in the app
-        st.write(f"Salary Data for {option2}:")
-        st.dataframe(df)
-    else:
+            st.subheader(f"Salary Data for {option}:")
+            st.dataframe(df)
+        else:
         # If the file doesn't exist, inform the user
-        st.write(f"")
+            st.write(f"Salary data for {option} is not available. Check back soon!")
 
 
-    # walkability 
-    st.subheader(f"Walkability for {option.split(',')[0]}")
-    walk_data = get_walk_score_selenium(option.split(",")[0], option.split(",")[1].strip())
+    #walkability 
+    st.subheader(f"Walkability for {option}")
+    get_walk_score_selenium(option.split(",")[0], option.split(",")[1].strip())
     walk_score_image = f"{option.split(',')[0].replace(' ', '_')}_walk_score2.svg"
 
     appt_for_rent_image = f"{option.split(',')[0].replace(' ', '_')}_appts_to_rent.png"
@@ -144,7 +161,10 @@ def main_body():
     with col1:
         st.markdown(svg_content, unsafe_allow_html=True)
     with col2:
-        st.write(walk_data)
+        #read from file called walkability_data.txt
+        with open("walkability_data.txt", "r") as file:
+            ret_walkability_data = file.read()  
+        st.write(ret_walkability_data)
     
 
 

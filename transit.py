@@ -8,14 +8,6 @@ import requests
 import os
 
 
-# walk score, apartments for rent
-xpath_array = ["/html/body/div[3]/div/div/div[2]/div/div[2]/div/div/div/div/div/div/img[1]", "/html/body/div[3]/div/div/div[2]/div/div[1]/a/div/div[2]/img"]
-
-
-transport_data = "/html/body/div[3]/div/div/div[2]/div/div[2]/p[1]/text()"
-
-
-
 def download_image(image_url, save_path):
     response = requests.get(image_url)
     if response.status_code == 200:
@@ -59,14 +51,13 @@ def get_walk_score_selenium(city, state_code):
             EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div/div/div[2]/div/div[2]/p[2]"))
         ))
 
-        
-        #conactenate the two walkability data
-        #walkability_data = walkability_data.text + walkability_data2.text
-        print(walkability_data.text)
-        print(walkability_data2.text)
 
-        ret_walkability_data = walkability_data.text + walkability_data2.text
-        return ret_walkability_data
+        ret_walkability_data = walkability_data.text + " " + walkability_data2.text
+        #write to file called walkability_data.txt
+        with open("walkability_data.txt", "w") as file:
+            file.write(ret_walkability_data)
+
+        
 
         
         # Get the image URL from the 'src' attribute of the image
@@ -90,8 +81,8 @@ def get_walk_score_selenium(city, state_code):
 
         
         
-        print(f"Walk Score image for {city}, {state_code} has been downloaded to: {save_path_walkscore}")
-        print(f"Appartments for rent map for {city}, {state_code} has been downloaded to: {save_path_map}")
+        # print(f"Walk Score image for {city}, {state_code} has been downloaded to: {save_path_walkscore}")
+        # print(f"Appartments for rent map for {city}, {state_code} has been downloaded to: {save_path_map}")
 
     except Exception as e:
         print(f"Error retrieving for {city}, {state_code}: {str(e)}")
@@ -99,5 +90,5 @@ def get_walk_score_selenium(city, state_code):
         driver.quit()
 
 
-get_walk_score_selenium("San Francisco", "CA")
+get_walk_score_selenium("Boston", "MA")
         

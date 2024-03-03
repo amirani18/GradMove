@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 def process_city_data(city):
-    # Load the Excel file
-    df = pd.read_excel('MSA_M2022_dl.xlsx')
+    # Load the combined_occupations.csv file into a DataFrame
+    df = pd.read_csv('combined_occupations.csv')
     
     # Filter rows where OCC_CODE starts with '15' - Computational and Mathematical Occupations
     filtered_df = df[df['OCC_CODE'].str.startswith('15')]
