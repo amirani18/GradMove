@@ -96,7 +96,43 @@ def page1():
 
     'You selected: ', option
 
-    def grid_one():
+    def info_in_cols():
+        # Create two columns
+        col1, col2 = st.columns(2)
+
+        # Display different information in each column
+        with col1:
+            st.write("Information for column 1")
+            # healthcare_cost func
+            def healthcare_cost(option):
+                # Retrieve the state abbreviation based on the selected city
+                input_city = option
+                input_state = city_to_state.get(input_city)
+
+                # Integrate cost functionality
+                providerCount = provider_by_state(input_state)
+                access_level = categorize_access(providerCount)
+                st.write(f"This state has a {access_level} number of providers:{providerCount}")
+                
+                # Generate cost chart
+                generate_chart(input_state)
+            healthcare_cost(option)
+
+        with col2:
+            st.write("Information for column 2")
+            # healthcare_access func
+            def healthcare_access(option):
+                input_city = option
+                input_state = city_to_state.get(input_city)
+
+                #Integrate access functionality
+                score = get_score_by_state(input_state)
+                access_level = identify_access_level(score)
+
+                draw_gauge_chart(input_state, "Clinic Accessibility")
+
+            healthcare_access(option)
+            
         random_df = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
 
         my_grid = grid(2, [2, 4, 1], 1, 4, vertical_align="bottom")
@@ -105,20 +141,6 @@ def page1():
         my_grid.dataframe(random_df, use_container_width=True)
         my_grid.line_chart(random_df, use_container_width=True)
 
-        # healthcare_cost func
-        def healthcare_cost(option):
-            # Retrieve the state abbreviation based on the selected city
-            input_city = option
-            input_state = city_to_state.get(input_city)
-
-            # Integrate cost functionality
-            providerCount = provider_by_state(input_state)
-            access_level = categorize_access(providerCount)
-            st.write(f"This state has a {access_level} number of providers:{providerCount}")
-            
-            # Generate cost chart
-            generate_chart(input_state)
-        healthcare_cost(option)
         my_grid.dataframe()
 
         
@@ -127,18 +149,6 @@ def page1():
         my_grid.text_input("Your name")
         my_grid.button("Send", use_container_width=True)
 
-        # healthcare_access func
-        def healthcare_access(option):
-            input_city = option
-            input_state = city_to_state.get(input_city)
-
-            #Integrate access functionality
-            score = get_score_by_state(input_state)
-            access_level = identify_access_level(score)
-
-            draw_gauge_chart(input_state, "Clinic Accessibility")
-
-        healthcare_access(option)
 
         # Row 3:
         my_grid.text_area("Your message", height=40)
@@ -153,7 +163,7 @@ def page1():
             st.slider("Filter by Height", 0.0, 2.0, 1.0)
             st.slider("Filter by Weight", 0.0, 100.0, 50.0)
         my_grid.dataframe(random_df, use_container_width=True)
-    grid_one()
+    info_in_cols()
 
 def page2():
     st.header("GradMove 🎓")
