@@ -5,7 +5,7 @@ import matplotlib
 import toml
 
 from streamlit_extras.grid import grid
-from cost import provider_by_state, categorize_access, generate_chart, cost, title_x, public
+from cost import abs_dev, provider_by_state, categorize_access, generate_chart, cost, title_x, public
 from access import get_score_by_state, identify_access_level, draw_gauge_chart, access
 
 # # Initial page config
@@ -114,9 +114,7 @@ def page1():
                 access_level = categorize_access(providerCount)
 
                 # Calculate the absolute deviations from the median
-                absolute_deviations = [abs(x - baseline) for x in copy]
-                variance = np.mean(np.square(absolute_deviations))
-                std_based_on_median = np.sqrt(variance)
+                std_based_on_median = abs_dev()
                 st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
                 st.write(f"This state has a {access_level} number of providers:{providerCount}")
                 
