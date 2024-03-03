@@ -5,9 +5,14 @@ import langchain
 import toml
 
 # Define your OpenAI API Key
-secrets = toml.load("secrets.toml")
+secrets = toml.load(".streamlit/secrets.toml")
 
-OPENAI_API_KEY = secrets["openai"]["api_key"]
+OPENAI_API_KEY = secrets['openai']['api_key']
+
+# how do I enter the api key in the secrets.toml file?
+# [openai]
+# api_key =
+
 
 def page_config():
     """Configures the initial page settings."""
