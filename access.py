@@ -10,21 +10,31 @@ import numpy as np
 #
 access = pd.read_csv('archive/access.csv')
 
-#Data cleaning for access csv
+# #Data cleaning for access csv
 
-county_counts = {'California': 58, 'Georgia': 159, 'Illinois': 102, 'Washington': 39,  'Colorado': 64, 'Kansas': 105, 
-                 'New York': 62, 'Texas': 254, 'Pennsylvania': 67, 'Massachusetts': 14}
+# county_counts = {'California': 58, 'Georgia': 159, 'Illinois': 102, 'Washington': 39,  'Colorado': 64, 'Kansas': 105, 
+#                  'New York': 62, 'Texas': 254, 'Pennsylvania': 67, 'Massachusetts': 14}
 
-# Map county counts to states
-access['County Count Per State'] = access['State'].map(county_counts)
+# # Map county counts to states
+# access['County Count Per State'] = access['State'].map(county_counts)
 
 # baseline % of county without clinic to determine high/low access
+def baseline_access():
+    #Data cleaning for access csv
+    county_counts = {'California': 58, 'Georgia': 159, 'Illinois': 102, 'Washington': 39,  'Colorado': 64, 'Kansas': 105, 
+                    'New York': 62, 'Texas': 254, 'Pennsylvania': 67, 'Massachusetts': 14}
+
+    # Map county counts to states
+    access['County Count Per State'] = access['State'].map(county_counts)
+    baseline = access['(%) Counties without Clinic'].mean()
+    return baseline
+
 
 baseline = access['(%) Counties without Clinic'].mean()
 stdev = access['(%) Counties without Clinic'].std()
 
 # Display baseline and standard deviation
-st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
+# st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
 st.write(f"Standard deviation: {stdev:.2f}%")
 
 #Considering the mean is 71.8, avg access is 47-71, low access is 71-95, high access = <0-47
