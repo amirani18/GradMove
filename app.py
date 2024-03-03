@@ -5,8 +5,8 @@ import matplotlib
 import toml
 
 from streamlit_extras.grid import grid
-from cost import provider_by_state, categorize_access, generate_chart, cost, title_x, public
-from access import get_score_by_state, identify_access_level, draw_gauge_chart, access
+from cost import abs_dev, provider_by_state, categorize_access, generate_chart, cost, title_x, public
+from access import baseline_access, stdev_access, disp_access_lvl, get_score_by_state, identify_access_level, draw_gauge_chart, access
 
 # # Initial page config
 title = "GradMove"
@@ -114,9 +114,7 @@ def page1():
                 access_level = categorize_access(providerCount)
 
                 # Calculate the absolute deviations from the median
-                absolute_deviations = [abs(x - baseline) for x in copy]
-                variance = np.mean(np.square(absolute_deviations))
-                std_based_on_median = np.sqrt(variance)
+                std_based_on_median = abs_dev()
                 st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
                 st.write(f"This state has a {access_level} number of providers:{providerCount}")
                 
@@ -135,6 +133,15 @@ def page1():
                 score = get_score_by_state(input_state)
                 access_level = identify_access_level(score)
 
+                # baseline access metric
+                baseline = baseline_access()
+                st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
+
+                # stdev access metric
+                stdev_val = stdev_access()
+                st.write(f"Standard deviation: {stdev_val:.2f}%")
+                access_level_2 = disp_access_lvl()
+                st.write(f"The access level is {access_level_2} for {input_state} with a score of {score}%.")
                 draw_gauge_chart(input_state, "Clinic Accessibility")
 
             healthcare_access(option)

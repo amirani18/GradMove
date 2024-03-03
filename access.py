@@ -10,22 +10,43 @@ import numpy as np
 #
 access = pd.read_csv('archive/access.csv')
 
-#Data cleaning for access csv
+# #Data cleaning for access csv
 
-county_counts = {'California': 58, 'Georgia': 159, 'Illinois': 102, 'Washington': 39,  'Colorado': 64, 'Kansas': 105, 
-                 'New York': 62, 'Texas': 254, 'Pennsylvania': 67, 'Massachusetts': 14}
+# county_counts = {'California': 58, 'Georgia': 159, 'Illinois': 102, 'Washington': 39,  'Colorado': 64, 'Kansas': 105, 
+#                  'New York': 62, 'Texas': 254, 'Pennsylvania': 67, 'Massachusetts': 14}
 
-# Map county counts to states
-access['County Count Per State'] = access['State'].map(county_counts)
+# # Map county counts to states
+# access['County Count Per State'] = access['State'].map(county_counts)
 
 # baseline % of county without clinic to determine high/low access
+def baseline_access():
+    #Data cleaning for access csv
+    county_counts = {'California': 58, 'Georgia': 159, 'Illinois': 102, 'Washington': 39,  'Colorado': 64, 'Kansas': 105, 
+                    'New York': 62, 'Texas': 254, 'Pennsylvania': 67, 'Massachusetts': 14}
 
-baseline = access['(%) Counties without Clinic'].mean()
-stdev = access['(%) Counties without Clinic'].std()
+    # Map county counts to states
+    access['County Count Per State'] = access['State'].map(county_counts)
+    baseline = access['(%) Counties without Clinic'].mean()
+    return baseline
+
+
+    # baseline = access['(%) Counties without Clinic'].mean()
+
+def stdev_access():
+    #Data cleaning for access csv
+    county_counts = {'California': 58, 'Georgia': 159, 'Illinois': 102, 'Washington': 39,  'Colorado': 64, 'Kansas': 105, 
+                    'New York': 62, 'Texas': 254, 'Pennsylvania': 67, 'Massachusetts': 14}
+
+    # Map county counts to states
+    access['County Count Per State'] = access['State'].map(county_counts)
+    stdev_val = access['(%) Counties without Clinic'].std()
+    return stdev_val
+
+# stdev = access['(%) Counties without Clinic'].std()
 
 # Display baseline and standard deviation
-st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
-st.write(f"Standard deviation: {stdev:.2f}%")
+# st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
+# st.write(f"Standard deviation: {stdev:.2f}%")
 
 #Considering the mean is 71.8, avg access is 47-71, low access is 71-95, high access = <0-47
 #Shade background red based on low, yellow based on avg, and green based on high?
@@ -63,9 +84,13 @@ def identify_access_level(score):
     else:
         return 'Undefined', 'grey'
 
-access_level = identify_access_level(score)
-st.write(f"The access level is {access_level} for {input_state} with a score of {score}%.")
+# display access_level
+def disp_access_lvl():
+    access_level = identify_access_level(score)
+    return access_level
 
+# access_level = identify_access_level(score)
+# st.write(f"The access level is {access_level} for {input_state} with a score of {score}%.")
 
 import plotly.graph_objs as go
 

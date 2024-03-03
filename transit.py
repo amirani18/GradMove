@@ -60,8 +60,11 @@ def get_walk_score_selenium(city, state_code):
         ))
 
         
-        print(walkability_data.text)
-        print(walkability_data2.text)
+        walkability_data = walkability_data.text + walkability_data2.text
+        # print(walkability_data.text)
+        # print(walkability_data2.text)
+        return walkability_data
+
         
         # Get the image URL from the 'src' attribute of the image
         image_url_walkscore = walk_score_element.get_attribute('src')
@@ -91,6 +94,4 @@ def get_walk_score_selenium(city, state_code):
         print(f"Error retrieving for {city}, {state_code}: {str(e)}")
     finally:
         driver.quit()
-
-# Example usage
-get_walk_score_selenium("Cambridge", "MA")
+        
