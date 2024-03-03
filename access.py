@@ -7,7 +7,7 @@ import numpy as np
 
 #Reading in data
 
-access = pd.read_csv('/archive/access.csv')
+access = pd.read_csv('archive/access.csv')
 
 #Data cleaning for access csv
 
@@ -104,10 +104,10 @@ def draw_gauge_chart(score, title="Clinic Accessibility"):
     fig.update_layout(annotations=[caption])
     fig.show()
 
-# Example usage:
-input_state = 'Kansas'  # Replace with the actual state name
-score = get_score_by_state(input_state)
-if score is not None:
-    draw_gauge_chart(score)
-else:
-    print(f"No data available for {input_state}.")
+# # Example usage:
+# input_state = 'Kansas'  # Replace with the actual state name
+# score = get_score_by_state(input_state)
+# if score is not None:
+#     draw_gauge_chart(score)
+# else:
+#     print(f"No data available for {input_state}.")
