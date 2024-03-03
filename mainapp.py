@@ -172,6 +172,32 @@ def main_body():
                 st.write(f"Standard deviation: {stdev_val:.2f}%")
                 st.write(f"The access level is {color} for {input_state} with a score of {score}%.")
             healthcare_access(option)
+        
+         def create_button(url, button_text):
+                button_html = f"""
+                <a href="{url}" target="_blank">
+                <button style="
+                 background: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+                 color: white;
+                 padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border: none;
+                border-radius: 12px;
+            ">
+                {button_text}
+            </button>
+        </a>
+        """
+    # Render the button in Streamlit
+        st.markdown(button_html, unsafe_allow_html=True)
+        
+ create_button("https://www.abortionfinder.org", "Need a clinic?")
+ create_button("https://abortionfunds.org/find-a-fund/", "Need a fund?")
 
     info_in_cols()
 
