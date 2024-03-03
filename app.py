@@ -16,7 +16,7 @@ config = toml.load('.streamlit/config.toml')
 # Get the theme settings
 theme_settings = config.get('theme', {})
 
-base_theme = theme_settings.get('base', 'light')
+base_theme = theme_settings.get('base', 'dark')
 primary_color = theme_settings.get('primaryColor', '#8A9A5B')
 background_color = theme_settings.get('backgroundColor', '#ffffff')
 secondary_background_color = theme_settings.get('secondaryBackgroundColor', '#f0f2f6')
