@@ -43,23 +43,13 @@ def handle_chat_input(user_input, use_langchain=False):
     """Handles the chat input, querying OpenAI or LangChain."""
     openai_api_key = OPENAI_API_KEY
     openai.api_key = openai_api_key
-    
-    if use_langchain:
-        # Using LangChain wrapper
-        lc_response = adapters.lc_openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # or another model you prefer
-            messages=[{"role": "user", "content": user_input}],
-            api_key=openai_api_key
-        )
-        return lc_response["choices"][0]["message"]["content"]
-    else:
-        # Directly using OpenAI API
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": user_input}],
-            api_key=openai_api_key
-        )
-        return response.choices[0].message.content
+    # Directly using OpenAI API
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": user_input}],
+        api_key=openai_api_key
+    )
+    return response.choices[0].message.content
 
 def main():
     """Main function to orchestrate the Streamlit app."""
