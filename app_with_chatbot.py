@@ -75,8 +75,6 @@ def main_body():
             st.image(img)
             break
 
-    
-
 def handle_chat_input(user_input, use_langchain=False):
     """Handles the chat input, querying OpenAI or LangChain."""
     openai_api_key = OPENAI_API_KEY

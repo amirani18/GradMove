@@ -119,6 +119,7 @@ page = st.sidebar.selectbox("Select a page", ["Housing Hub", "Chatbot"])
 # Display the content of the selected page
 if page == "Housing Hub":
     page1()
+    healthcare_cost()
 elif page == "Chatbot":
     page2()
 # elif page == "Page 3":
