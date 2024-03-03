@@ -96,42 +96,63 @@ def page1():
 
     'You selected: ', option
 
-    def healthcare_cost(option):
-        # Retrieve the state abbreviation based on the selected city
-        input_city = option
-        input_state = city_to_state.get(input_city)
+    def grid():
+        random_df = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
 
-        # Integrate cost functionality
-        providerCount = provider_by_state(input_state)
-        access_level = categorize_access(providerCount)
-        st.write(f"This state has a {access_level} number of providers:{providerCount}")
+        my_grid = grid(2, [2, 4, 1], 1, 4, vertical_align="bottom")
 
-        # Generate cost chart
-        chart = generate_chart(input_state)
-        # Create two columns
-        col1, col2 = st.columns(2)
+        # Row 1:
+        my_grid.dataframe(random_df, use_container_width=True)
+        my_grid.line_chart(random_df, use_container_width=True)
 
-        # Display an image in the first column
-        with col1:
-            st.subheader('Image in Column 1')
+        # healthcare_cost func
+        def healthcare_cost(option):
+            # Retrieve the state abbreviation based on the selected city
+            input_city = option
+            input_state = city_to_state.get(input_city)
 
-        # Display a different image in the second column
-        with col2:
-            st.subheader('Image in Column 2')
-            st.image(chart, caption='cost of providers in state')
+            # Integrate cost functionality
+            providerCount = provider_by_state(input_state)
+            access_level = categorize_access(providerCount)
+            st.write(f"This state has a {access_level} number of providers:{providerCount}")
+            
+            # Generate cost chart
+            generate_chart(input_state)
+        healthcare_cost(option)
 
-    def healthcare_access(option):
-        input_city = option
-        input_state = city_to_state.get(input_city)
+        
+        # Row 2:
+        my_grid.selectbox("Select Country", ["Germany", "Italy", "Japan", "USA"])
+        my_grid.text_input("Your name")
+        my_grid.button("Send", use_container_width=True)
 
-        #Integrate access functionality
-        score = get_score_by_state(input_state)
-        access_level = identify_access_level(score)
+        # healthcare_access func
+        def healthcare_access(option):
+            input_city = option
+            input_state = city_to_state.get(input_city)
 
-        draw_gauge_chart(input_state, "Clinic Accessibility")
+            #Integrate access functionality
+            score = get_score_by_state(input_state)
+            access_level = identify_access_level(score)
 
-    healthcare_cost(option)
-    healthcare_access(option)
+            draw_gauge_chart(input_state, "Clinic Accessibility")
+
+        healthcare_access(option)
+
+        # Row 3:
+        my_grid.text_area("Your message", height=40)
+        # Row 4:
+        my_grid.button("Example 1", use_container_width=True)
+        my_grid.button("Example 2", use_container_width=True)
+        my_grid.button("Example 3", use_container_width=True)
+        my_grid.button("Example 4", use_container_width=True)
+        # Row 5 (uses the spec from row 1):
+        with my_grid.expander("Show Filters", expanded=True):
+            st.slider("Filter by Age", 0, 100, 50)
+            st.slider("Filter by Height", 0.0, 2.0, 1.0)
+            st.slider("Filter by Weight", 0.0, 100.0, 50.0)
+        my_grid.dataframe(random_df, use_container_width=True)
+    grid()
 
 def page2():
     st.header("GradMove 🎓")
