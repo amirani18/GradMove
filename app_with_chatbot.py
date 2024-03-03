@@ -4,7 +4,11 @@ import openai
 import langchain
 
 # Define your OpenAI API Key
+<<<<<<< HEAD
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]  # For production, use st.secrets to manage your API key securely
+=======
+OPENAI_API_KEY = "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"  # For production, use st.secrets to manage your API key securely
+>>>>>>> 5db8effb8bc4adf810a40003e4468e3c56020bed
 
 def page_config():
     """Configures the initial page settings."""
@@ -43,23 +47,13 @@ def handle_chat_input(user_input, use_langchain=False):
     """Handles the chat input, querying OpenAI or LangChain."""
     openai_api_key = OPENAI_API_KEY
     openai.api_key = openai_api_key
-    
-    if use_langchain:
-        # Using LangChain wrapper
-        lc_response = langchain.adapters.openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": user_input}],
-            api_key=openai_api_key
-        )
-        return lc_response["choices"][0]["message"]["content"]
-    else:
-        # Directly using OpenAI API
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": user_input}],
-            api_key=openai_api_key
-        )
-        return response.choices[0].message.content
+    # Directly using OpenAI API
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": user_input}],
+        api_key=openai_api_key
+    )
+    return response.choices[0].message.content
 
 def main():
     """Main function to orchestrate the Streamlit app."""
