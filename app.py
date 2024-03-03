@@ -119,6 +119,16 @@ def page1():
 
     healthcare_cost(option)
 
+def healthcare_access(option):
+        input_city = option
+        input_state = city_to_state.get(input_city)
+
+        #Integrate access functionality
+        score = get_score_by_state(input_state)
+        access_level = identify_access_level(score)
+
+        draw_gauge_chart(input_state, "Clinic Accessibility")
+
 def page2():
     st.header("GradMove 🎓")
     st.write("This is Chatbot.")
