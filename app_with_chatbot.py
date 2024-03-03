@@ -79,6 +79,8 @@ def main_body():
                 st.image(j)
             break
 
+    option2 = ""
+
     #one to one hot encoding of cities
     if option == "San Francisco, CA":
         option2 = "San Francisco-Oakland-Hayward, CA"
@@ -128,13 +130,21 @@ def main_body():
 
 
     # walkability 
+    st.subheader(f"Walkability for {option.split(',')[0]}")
     walk_data = get_walk_score_selenium(option.split(",")[0], option.split(",")[1].strip())
-    walk_score_image = f"{option.split(',')[0].replace(' ', '_')}_walk_score2.png"
+    walk_score_image = f"{option.split(',')[0].replace(' ', '_')}_walk_score2.svg"
+
     appt_for_rent_image = f"{option.split(',')[0].replace(' ', '_')}_appts_to_rent.png"
 
-    st.subheader("Walkability for " + option.split(",")[0])
-    st.image(walk_score_image)
-    st.write(walk_data)
+    col1, col2 = st.columns(2)
+
+    #st.image(walk_score_image)
+    with open(walk_score_image, 'r', encoding='utf-8') as file:
+        svg_content = file.read()
+    with col1:
+        st.markdown(svg_content, unsafe_allow_html=True)
+    with col2:
+        st.write(walk_data)
     
 
 
