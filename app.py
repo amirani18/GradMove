@@ -116,10 +116,8 @@ def page1():
         with col2:
             st.subheader('Image in Column 2')
             st.image(chart, caption='cost of providers in state')
-
-    healthcare_cost(option)
-
-def healthcare_access(option):
+            
+    def healthcare_access(option):
         input_city = option
         input_state = city_to_state.get(input_city)
 
@@ -129,7 +127,8 @@ def healthcare_access(option):
 
         draw_gauge_chart(input_state, "Clinic Accessibility")
 
-healthcare_access(option)
+    healthcare_cost(option)
+    healthcare_access(option)
 
 def page2():
     st.header("GradMove 🎓")
