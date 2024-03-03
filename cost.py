@@ -12,18 +12,6 @@ cost = pd.read_csv('archive/cost.csv')
 #Data cleaning and preparation
 baseline = cost['No. of abortion providers'].median()
 
-#Standard deviation:
-copy = cost.copy()
-data = copy['No. of abortion providers']
-outliers = [419, 252]
-copy = [x for x in data if x not in outliers]
-
-# # Calculate the absolute deviations from the median
-# absolute_deviations = [abs(x - baseline) for x in copy]
-# variance = np.mean(np.square(absolute_deviations))
-# std_based_on_median = np.sqrt(variance)
-# st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
-
 # func
 def abs_dev():
     #Data cleaning and preparation
@@ -46,8 +34,6 @@ def abs_dev():
 #Avg access to providers: 41-56
 
 # Visual
-
-input_state = 'Kansas'
 
 def provider_by_state(input_state):
     # Check if the input_state is in the DataFrame
@@ -92,7 +78,6 @@ def generate_chart(input_state):
     count = provider_by_state(input_state)
     if count is not None:
         access_level = categorize_access(count)
-        st.write(f"This state has a {access_level} number of providers: {count}")
         
         # Filter the data for the given state
         state_data = cost[cost['State'] == input_state]
