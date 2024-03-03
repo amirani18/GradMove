@@ -112,6 +112,12 @@ def page1():
                 # Integrate cost functionality
                 providerCount = provider_by_state(input_state)
                 access_level = categorize_access(providerCount)
+
+                # Calculate the absolute deviations from the median
+                absolute_deviations = [abs(x - baseline) for x in copy]
+                variance = np.mean(np.square(absolute_deviations))
+                std_based_on_median = np.sqrt(variance)
+                st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
                 st.write(f"This state has a {access_level} number of providers:{providerCount}")
                 
                 # Generate cost chart
@@ -132,7 +138,7 @@ def page1():
                 draw_gauge_chart(input_state, "Clinic Accessibility")
 
             healthcare_access(option)
-            
+
         random_df = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
 
         my_grid = grid(2, [2, 4, 1], 1, 4, vertical_align="bottom")

@@ -18,11 +18,11 @@ data = copy['No. of abortion providers']
 outliers = [419, 252]
 copy = [x for x in data if x not in outliers]
 
-# Calculate the absolute deviations from the median
-absolute_deviations = [abs(x - baseline) for x in copy]
-variance = np.mean(np.square(absolute_deviations))
-std_based_on_median = np.sqrt(variance)
-st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
+# # Calculate the absolute deviations from the median
+# absolute_deviations = [abs(x - baseline) for x in copy]
+# variance = np.mean(np.square(absolute_deviations))
+# std_based_on_median = np.sqrt(variance)
+# st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
 
 #Determine access intervals 
 #On average, tech hubs differ by 15 in terms of abortion providers
