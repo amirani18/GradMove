@@ -56,7 +56,9 @@ def page_config():
     # st.image("gradmove_white_logo-removebg.png", use_column_width=True)
     title = "GradMove"
     st.title(f"{title} 🎓")
+    st.subheader("Embark on Your Next Chapter with Confidence.")
     st.write("by Areej, Shreya, Vibha, Mihika")
+    st.text("GradMove is here to streamline your transition from college to career. As you prepare to start your first job in a new city, we understand the whirlwind of questions and decisions you face. Where will you live? How will you commute? What healthcare options are available? GradMove is your dedicated companion, designed to fast-forward through the initial, overwhelming searches and present you with clear, concise, and crucial information about your future home.")
     st.sidebar.title("Vibes 💖")
 
 def user_inputs():
