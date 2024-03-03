@@ -96,10 +96,10 @@ def page1():
 
     'You selected: ', option
 
-    def grid():
+    def grid_one():
         random_df = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
 
-        my_grid = grid(2, [2, 4, 1], 1, 4)
+        my_grid = grid(2, [2, 4, 1], 1, 4, vertical_align="bottom")
 
         # Row 1:
         my_grid.dataframe(random_df, use_container_width=True)
@@ -152,7 +152,7 @@ def page1():
             st.slider("Filter by Height", 0.0, 2.0, 1.0)
             st.slider("Filter by Weight", 0.0, 100.0, 50.0)
         my_grid.dataframe(random_df, use_container_width=True)
-    grid()
+    grid_one()
 
 def page2():
     st.header("GradMove 🎓")
