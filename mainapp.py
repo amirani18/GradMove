@@ -82,9 +82,7 @@ def handle_chat_input(user_input, use_langchain=False):
     return response.choices[0].message.content
     
 def main_body():
-    st.header("GradMove 🎓")
-    st.write("Welcome to Housing Hub!")
-
+    st.markdown('---')
     # selectbox for cities
     df = pd.DataFrame(
         {
@@ -125,7 +123,7 @@ def main_body():
     st.markdown('---')
 
     def info_in_cols():
-        # Create two columns
+        # Create columns
         col1, col2 = st.columns(2)
 
         # Display different information in each column
@@ -157,12 +155,14 @@ def main_body():
                 input_city = option
                 input_state = city_to_state.get(input_city)
 
-                # paragraph explaining stats
-                st.write(f"{score} % of counties in this state have no clinics.")
-
                 #Integrate access functionality
                 score = get_score_by_state(input_state)
                 color = identify_access_level(score)
+
+                # paragraph explaining stats
+                st.write(f"{score} % of counties in this state have no clinics.")
+
+                # display
                 image_path = draw_gauge_chart(score)
                 st.image(image_path)
 
@@ -175,34 +175,70 @@ def main_body():
                 # st.write(f"Standard deviation: {stdev_val:.2f}%")
                 # st.write(f"The access level is {color} for {input_state} with a score of {score}%.")
             healthcare_access(option)
-        
-        def create_button(url, button_text):
-            button_html = f"""
-                <a href="{url}" target="_blank">
-                <button style="
-                background: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 20px;
-                margin: 4px 2px;
-                cursor: pointer;
-                border: none;
-                border-radius: 12px;
-                ">
-                {button_text}
-                </button>
-                </a>
-                """
-            # Render the button in Streamlit
-            st.markdown(button_html, unsafe_allow_html=True)
-        
-        create_button("https://www.abortionfinder.org", "Need a clinic?")
-        create_button("https://abortionfunds.org/find-a-fund/", "Need a fund?")
 
     info_in_cols()
+
+    def healthcare_info_in_cols():
+        # Create columns
+        col1, col2 = st.columns(2)
+
+        # Display different information in each column
+        with col1:
+            st.text("Healthcare Links 🔗")
+            def create_button(url, button_text):
+                button_html = f"""
+                    <a href="{url}" target="_blank">
+                    <button style="
+                    background: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 20px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    border: none;
+                    border-radius: 12px;
+                    ">
+                    {button_text}
+                    </button>
+                    </a>
+                    """
+                # Render the button in Streamlit
+                st.markdown(button_html, unsafe_allow_html=True)
+            create_button("https://abortionfunds.org/find-a-fund/", "Need a fund?")
+
+        with col2:
+            st.text("Healthcare Clinics 🏥")
+            # healthcare_access func
+            def create_button(url, button_text):
+                button_html = f"""
+                    <a href="{url}" target="_blank">
+                    <button style="
+                    background: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 20px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    border: none;
+                    border-radius: 12px;
+                    ">
+                    {button_text}
+                    </button>
+                    </a>
+                    """
+                # Render the button in Streamlit
+                st.markdown(button_html, unsafe_allow_html=True)
+        
+            create_button("https://www.abortionfinder.org", "Need a clinic?")
+
+    healthcare_info_in_cols()
+    st.markdown('---')
 
     option2 = ""
 
