@@ -105,6 +105,8 @@ def page1():
         # Generate cost chart
         generate_chart(input_state)
 
+    healthcare_cost(option)
+
 def page2():
     st.header("GradMove 🎓")
     st.write("This is Chatbot.")
