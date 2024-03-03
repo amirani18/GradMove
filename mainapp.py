@@ -16,7 +16,8 @@ from access import baseline_access, stdev_access, get_score_by_state, identify_a
 
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")
-os.environ['OPENAI_API_KEY'] = "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"
+os.environ['OPENAI_API_KEY'] = "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"
+openai_api_key = os.environ.get('OPENAI_API_KEY')
 
 # Load the config settings from config.toml
 config = toml.load('.streamlit/config.toml')
@@ -74,7 +75,7 @@ def user_inputs():
 
 def handle_chat_input(user_input, use_langchain=False):
     """Handles the chat input, querying OpenAI or LangChain."""
-    openai_api_key = OPENAI_API_KEY
+    # openai_api_key = os.environ['OPENAI_API_KEY']
     openai.api_key = openai_api_key
     # Directly using OpenAI API
     response = openai.ChatCompletion.create(
@@ -139,15 +140,16 @@ def main_body():
                 input_state = city_to_state.get(input_city)
 
                 # Integrate cost functionality
-                providerCount = provider_by_state(input_state)
-                access_level = categorize_access(providerCount)
+                # providerCount = provider_by_state(input_state)
+                # access_level = categorize_access(providerCount)
 
                 # Calculate the absolute deviations from the median
-                std_based_on_median = abs_dev()
-                st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
-                st.write(f"This state has a {access_level} number of providers:{providerCount}")
+                # std_based_on_median = abs_dev()
+                # st.write("Standard deviation based on the median after removing outliers:", std_based_on_median)
+                # st.write(f"This state has a {access_level} number of providers:{providerCount}")
                 
                 # Generate cost chart
+                st.write("Abortion costs dependant on location.")
                 generate_chart(input_state)
             healthcare_cost(option)
 
