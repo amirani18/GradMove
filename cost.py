@@ -7,8 +7,8 @@ import numpy as np
 
 #Reading in data
 
-access = pd.read_csv('access.csv')
-cost = pd.read_csv('cost.csv')
+# access = pd.read_csv('access.csv')
+cost = pd.read_csv('archive/cost.csv')
 
 #Data cleaning for cost csv
 
