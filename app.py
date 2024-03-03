@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib
 import toml
 
+from streamlit_extras.grid import grid
 from cost import provider_by_state, categorize_access, generate_chart, cost, title_x, public
 from access import get_score_by_state, identify_access_level, draw_gauge_chart, access
 
