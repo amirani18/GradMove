@@ -42,19 +42,10 @@ def stdev_access():
     stdev_val = access['(%) Counties without Clinic'].std()
     return stdev_val
 
-# stdev = access['(%) Counties without Clinic'].std()
-
-# Display baseline and standard deviation
-# st.write(f"Baseline (mean % of counties without a clinic): {baseline:.2f}%")
-# st.write(f"Standard deviation: {stdev:.2f}%")
-
 #Considering the mean is 71.8, avg access is 47-71, low access is 71-95, high access = <0-47
 #Shade background red based on low, yellow based on avg, and green based on high?
 
 # Check if a score is within the high access range
-
-input_state = 'Kansas'
-
 def get_score_by_state(input_state):
     # Check if the input_state is in the DataFrame
     if input_state in access['State'].values:
@@ -66,15 +57,12 @@ def get_score_by_state(input_state):
     else:
         return None
 
-
 # Get the score for the input state
-score = get_score_by_state(input_state)
+avg_access_range = (48, 72)
+low_access_range = (72, max(access['(%) Counties without Clinic']))
+high_access_range = (0, 47)
 
 def identify_access_level(score):
-    avg_access_range = (48, 72)
-    low_access_range = (72, max(access['(%) Counties without Clinic']))
-    high_access_range = (0, 47)
-    
     if high_access_range[0] <= score <= high_access_range[1]:
         return 'High', 'green'
     elif avg_access_range[0] <= score <= avg_access_range[1]:
@@ -84,51 +72,44 @@ def identify_access_level(score):
     else:
         return 'Undefined', 'grey'
 
-# display access_level
-def disp_access_lvl():
-    access_level = identify_access_level(score)
-    return access_level
-
-# access_level = identify_access_level(score)
-# st.write(f"The access level is {access_level} for {input_state} with a score of {score}%.")
-
-import plotly.graph_objs as go
-
 # Function to draw the gauge chart
-def draw_gauge_chart(score, title="Clinic Accessibility"):
+def draw_gauge_chart(score, filename="gauge_chart.png"):
     # Get the access level and color based on the percentage
     access_level, color = identify_access_level(score)
-    
+
     # Draw the gauge chart using Plotly
     fig = go.Figure()
 
     fig.add_trace(go.Indicator(
-        mode = "gauge+number",
-        value = score,
-        title = {'text': title},
-        gauge = {
+        mode="gauge+number",
+        value=score,
+        title={'text': "Clinic Accessibility"},
+        gauge={
             'axis': {'range': [None, 100]},
-            'bar': {'color': color}, # the bar color
-            'steps' : [
-                {'range': [score, 100], 'color': 'lightgray', 
-                    'thickness': 0.5},
+            'bar': {'color': color},  # the bar color
+            'steps': [
+                {'range': [score, 100], 'color': 'lightgray',
+                 'thickness': 0.5},
             ],
         }
     ))
-    
+
     # note to make it dependent on input
-    
+
     caption = go.layout.Annotation(
-    text=f"% of counties without abortion clinics",
-    showarrow=False,
-    xref="paper",
-    yref="paper",
-    x=0,
-    y=-0.2,
-    font=dict(size=24),
-    align='center',
-   )
+        text=f"% of counties without abortion clinics",
+        showarrow=False,
+        xref="paper",
+        yref="paper",
+        x=0,
+        y=-0.2,
+        font=dict(size=24),
+        align='center',
+    )
 
     fig.update_layout(annotations=[caption])
-    st.plotly_chart(fig)
+    fig.write_image(filename, format='png')
+    return filename
+
+
 
