@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import toml
 
+from cost import provider_by_state, categorize_access,
+generate_chart, cost, title_x, public
+
 # # Initial page config
 title = "GradMove"
 st.title(title + " 🎓")
@@ -17,7 +20,7 @@ base_theme = theme_settings.get('base', 'light')
 primary_color = theme_settings.get('primaryColor', '#8A9A5B')
 background_color = theme_settings.get('backgroundColor', '#ffffff')
 secondary_background_color = theme_settings.get('secondaryBackgroundColor', '#f0f2f6')
-text_color = theme_settings.get('textColor', '#e0218a')
+text_color = theme_settings.get('textColor', '#F4C2C2')
 font = theme_settings.get('font', 'serif')
 
 # user inputs on sidebar
@@ -46,20 +49,59 @@ st.markdown("Your go-to app for finding housing near your dream job, curated bas
 # #     st.write("You are on Page 3.")
 
 # Define different page content
+
+city_to_state = {
+    "San Francisco, CA": "California",
+    "Atlanta, GA": "Georgia",
+    "Chicago, IL": "Illinois",
+    "Seattle, WA": "Washington",
+    "Denver, CO": "Colorado",
+    "Kansas City, KS": "Kansas",
+    "New York, NY": "New York",
+    "Austin, TX": "Texas",
+    "Philadelphia, PA": "Pennsylvania",
+    "Cambridge, MA": "Massachusetts",
+
+}
 def page1():
     st.header("GradMove 🎓")
     st.write("Welcome to Housing Hub!")
-    # selectbox for cities
-    df = pd.DataFrame({
-        'cities': ["San Francisco", "Chicago", "New York", "Seattle", "Cambridge", "Amsterdam" ],
-    })
-
+     # selectbox for cities
+    df = pd.DataFrame(
+        {
+            "cities": [
+                "San Francisco, CA",
+                "Atlanta, GA",
+                "Chicago, IL",
+                "Seattle, WA",
+                "Denver, CO",
+                "Kansas City, KS",
+                "New York, NY",
+                "Austin, TX",
+                "Philadelphia, PA",
+                "Cambridge, MA",
+            ]
+        }
+    )
+  
     option = st.selectbox(
         'Which city do you plan to move to?',
         df['cities']
     )
 
-    'You selected: ', option
+  'You selected: ', option
+   input_city = option
+   input_state = city_to_state.get(input_city)
+
+  # Integrate cost functionality
+   providerCount = provider_by_state(input_state)
+   access_level = categorize_access(providerCount)
+   st.write(f"This state has a {access_level} number of providers:{providerCount}")
+
+  #Generate cost chart
+   generate_chart(input_state)
+
+
 
 def page2():
     st.header("GradMove 🎓")
