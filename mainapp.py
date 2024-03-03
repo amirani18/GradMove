@@ -46,6 +46,8 @@ city_to_state = {
     "Austin, TX": "Texas",
     "Philadelphia, PA": "Pennsylvania",
     "Cambridge, MA": "Massachusetts",
+    "Boston, MA": "Massachusetts",
+    "Los Angeles, CA": "California",
 
 }
 
@@ -73,7 +75,8 @@ def main_body():
     
     df = pd.DataFrame({
         # add all the cities in the United States
-        'cities': ["San Francisco, CA", "Chicago, IL", "New York, NY", "Seattle, WA", "Cambridge, MA", "Boston, MA", "Los Angeles, CA", "Austin, TX", "Denver, CO", "Portland, OR", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA", "Kansas City, MO"]
+        'cities': ["San Francisco, CA", "Chicago, IL", "New York, NY", "Seattle, WA", "Cambridge, MA", "Boston, MA", 
+                   "Los Angeles, CA", "Austin, TX", "Denver, CO", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA]
     })
 
     # df = pd.DataFrame(
