@@ -13,7 +13,7 @@ import time
 # Define your OpenAI API Key
 secrets = toml.load(".streamlit/secrets.toml")
 
-OPENAI_API_KEY = secrets['openai']['api_key']
+OPENAI_API_KEY = "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"
 
 # how do I enter the api key in the secrets.toml file?
 # [openai]
